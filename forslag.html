@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="da">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lighedsdebat – forklaringer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Page background: change --bg to the exact Ø purple if needed */
+  --bg:#5b2a86; --on-bg:#ffffff; --on-bg-muted:#e2d5ee; --tint:#f4eff8;
+  --panel:#ffffff; --ink:#1d1d1b; --muted:#6b6862; --line:#e3dfd6;
+  --accent:#1f5f8b; --accent-soft:#e3eef6; --pos:#2e7d4f; --neg:#b3412f; --warn:#9a6a00;
+  --bar-a:#1f5f8b; --bar-b:#c98a2e;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#26163a; --on-bg:#f1ecf6; --on-bg-muted:#c2b3d3; --tint:#272330;
+    --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
+    --accent:#6fb0dc; --accent-soft:#1f3242; --pos:#6cc490; --neg:#e98a78; --warn:#e2b54f;
+    --bar-a:#6fb0dc; --bar-b:#e2b05f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#26163a; --on-bg:#f1ecf6; --on-bg-muted:#c2b3d3; --tint:#272330;
+    --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
+  --accent:#6fb0dc; --accent-soft:#1f3242; --pos:#6cc490; --neg:#e98a78; --warn:#e2b54f;
+  --bar-a:#6fb0dc; --bar-b:#e2b05f;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--on-bg);font:15px/1.5 Inter,system-ui,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:32px 16px 120px}
+h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 8px}
+h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:24px;margin:40px 0 4px}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 6px}
+hr{border:0;border-top:1px solid var(--line);margin:24px 0}
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+input:focus{outline:2px solid var(--accent);outline-offset:-1px}
+button{font:inherit;font-weight:500;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:7px 14px;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent)}
+button:disabled{opacity:.5;cursor:default}
+.combo{position:relative;width:300px;max-width:100%}
+.combo input{width:100%}
+.combo ul{position:absolute;z-index:20;left:0;right:0;top:100%;margin:4px 0 0;padding:4px;list-style:none;background:var(--panel);border:1px solid var(--line);border-radius:6px;max-height:280px;overflow:auto;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.combo li{padding:6px 8px;border-radius:4px;cursor:pointer;display:flex;justify-content:space-between;gap:8px}
+.combo li:hover,.combo li.active{background:var(--accent-soft)}
+.combo li small{color:var(--muted)}
+.viewing{font-size:13px;color:var(--muted);margin-top:10px}
+.viewing b{color:var(--ink)}
+.row{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin:10px 0;display:grid;grid-template-columns:minmax(0,1fr) 380px 140px;gap:16px;align-items:center}
+.row .t{font-weight:500}
+.row .note{color:var(--muted);font-size:13px;margin-top:2px}
+.row .src{font-size:12px;color:var(--muted);margin-top:2px;word-break:break-all}
+.row .src a{color:var(--accent)}
+.ctl{display:flex;flex-direction:column;gap:6px}
+.ctl .line{display:flex;gap:8px;align-items:center}
+.ctl input[type=range]{flex:1;accent-color:var(--accent);min-width:0}
+.ctl input[type=number]{width:96px}
+.ctl input.bin{width:150px;text-align:right;font-variant-numeric:tabular-nums}
+.ctl .unit{font-size:12px;color:var(--muted);width:56px}
+.ctl .lbl{font-size:11px;color:var(--muted);width:52px}
+.ctl .range{font-size:11px;color:var(--muted)}
+.out{text-align:right;font-variant-numeric:tabular-nums}
+.out .v{font-size:18px;font-weight:600}
+.out .s{font-size:12px;color:var(--muted)}
+.ro{background:transparent!important;border-style:dashed!important;color:var(--muted)!important}
+.summary{position:sticky;bottom:0;z-index:10;background:var(--panel);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.06)}
+.summary .in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center;font-variant-numeric:tabular-nums}
+.summary .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.summary .n{font-weight:600;font-size:17px}
+.pos{color:var(--pos)} .neg{color:var(--neg)}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:14px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:12px;color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px}
+.chart{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin:12px 0}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.totals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.card .k{font-size:12px;color:var(--muted)}
+.card .n{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.card .s{font-size:12px;color:var(--muted)}
+.savebox{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;margin-top:24px}
+.msg{font-size:14px;margin-top:10px;min-height:1.2em}
+.confirm{display:none;margin-top:10px;padding:10px 12px;border-radius:6px;background:var(--accent-soft)}
+.confirm.show{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.topnav{display:flex;gap:16px;margin:0 0 16px;font-size:14px}
+.topnav a{color:var(--accent);text-decoration:none}
+.topnav a[aria-current]{color:var(--ink);font-weight:600}
+.row .more{font-size:13px;margin-top:4px}
+.row .more a{color:var(--accent);text-decoration:none}
+.row{scroll-margin-top:16px}
+/* text on the purple background vs. inside white panels */
+.row,.card,.chart,.tablewrap,.savebox,.combo ul,.summary,.ex,.method{color:var(--ink)}
+main > .lede,.viewing,main > .toolbar .field label,nav.toc h4{color:var(--on-bg-muted)}
+.viewing b{color:var(--on-bg)}
+main > hr{border-top-color:rgba(255,255,255,.25)}
+.topnav a{color:var(--on-bg-muted)!important}
+.topnav a[aria-current]{color:var(--on-bg)!important}
+main > .toolbar button.ghost{color:var(--on-bg);border-color:var(--on-bg)}
+.row details.dt{grid-column:1/-1;margin-top:-4px}
+.row details.dt summary{cursor:pointer;font-size:13px;color:var(--accent);width:max-content}
+.dtscroll{overflow-x:auto;margin-top:8px}
+.row .dtw table{font-size:13px}
+.row .dtw tr.tot td{font-weight:600;border-top:2px solid var(--line)}
+.dtn{font-size:12px;color:var(--muted);margin:6px 0 0}
+.badge{font-size:11px;padding:2px 6px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
+@media (max-width:820px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .ctl input[type=number]{width:90px}
+  .out{text-align:left}
+}
+
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:32px;align-items:start}
+nav.toc{position:sticky;top:16px;font-size:13px;max-height:calc(100vh - 32px);overflow:auto}
+nav.toc h4{margin:16px 0 6px;font-size:12px;color:var(--on-bg-muted);text-transform:uppercase;letter-spacing:.04em}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc li{margin:0}
+nav.toc a{display:block;padding:4px 8px;border-radius:4px;color:var(--on-bg);text-decoration:none}
+nav.toc a:hover{background:rgba(255,255,255,.12)}
+.topnav{display:flex;gap:16px;margin:0 0 16px;font-size:14px}
+.topnav a{color:var(--accent);text-decoration:none}
+.topnav a[aria-current]{color:var(--ink);font-weight:600}
+.ex{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:0 0 16px;scroll-margin-top:16px}
+.ex h3{font-family:"Source Serif 4",Georgia,serif;font-size:21px;margin:0 0 6px}
+.ex h4{font-size:13px;margin:16px 0 4px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ex p{margin:4px 0;max-width:72ch}
+.facts{display:flex;flex-wrap:wrap;gap:8px 24px;margin:12px 0 0;padding:10px 12px;background:var(--tint);border-radius:6px}
+.facts dt{font-size:11px;color:var(--muted)}
+.facts dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc ul{margin:4px 0;padding-left:18px}
+.pc li{margin:2px 0}
+.note{color:var(--muted);font-size:14px;margin-top:10px!important}
+.warn{margin:12px 0 4px;padding:10px 12px;border-radius:6px;border-left:3px solid var(--warn);background:var(--tint);font-size:14px}
+.src{font-size:12px;color:var(--muted);word-break:break-all}
+.src a{color:var(--accent)}
+.back{font-size:13px;margin-top:12px!important}
+.back a{color:var(--accent);text-decoration:none}
+.method{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:0 0 24px}
+.method h3{font-family:"Source Serif 4",Georgia,serif;font-size:21px;margin:0 0 6px}
+.method p,.method li{max-width:72ch}
+h2.grp{margin:28px 0 12px}
+@media (max-width:820px){.layout{grid-template-columns:minmax(0,1fr)}nav.toc{position:static;max-height:none}.pc{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<main>
+  <nav class="topnav"><a href="index.html">Regnemaskine</a><a href="forslag.html" aria-current="page">Forklaringer</a></nav>
+  <h1>Forklaringer til forslagene</h1>
+  <p class="lede">Hvad hvert forslag går ud på, hvordan regnemaskinen beregner det, og de vigtigste argumenter for og imod.</p>
+  <hr>
+  <div class="layout">
+    <nav class="toc" aria-label="Indhold">
+      <h4>Generelt</h4><ul><li><a href="#metode">Sådan læser du tallene</a></li></ul>
+      <h4>Finansiering</h4><ul><li><a href="#r2">Formueskat på høje formuer</a></li><li><a href="#r3">Ejendomsskat på avance ved salg</a></li><li><a href="#r4">Bred formueskat</a></li><li><a href="#r5">Ekstra ejendomsskat (løbende)</a></li><li><a href="#r6">Ekstra moms med tilbagebetaling</a></li><li><a href="#r7">Udligningsskat på indkomster over gennemsnittet</a></li><li><a href="#r8">Luksusskat</a></li><li><a href="#r9">Arve- og gaveskat</a></li><li><a href="#r10">Indkomstbaseret egenbetaling for offentlige ydelser</a></li></ul>
+      <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af 25 % af landbrugsjorden</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r28">Lavere forbrug af kød</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li></ul>
+    </nav>
+    <div>
+      <section class="method" id="metode">
+        <h3>Sådan læser du tallene</h3>
+        <ul>
+          <li><b>Andel af BNP:</b> alle beløb omregnes til procent af BNP (ca. 3.119 mia. kr.). Et beløb pr. skatteborger ganges med 4,9 mio. skatteborgere.</li>
+          <li><b>Valgt scenarie og max:</b> "valgt" er provenuet eller udgiften ved din sats. "Max" er det samme ved den højeste sats i regnearkets interval.</li>
+          <li><b>Andel investering:</b> hvor stor en del af et forslag der regnes som investering/formue frem for forbrug/løn. Regnestykket viser både den samlede balance og balancen inden for henholdsvis forbrug og investering.</li>
+          <li><b>Decilerne:</b> befolkningen er delt i ti lige store grupper efter disponibel indkomst. Tabellen viser, hvad forslagene samlet betyder for hver gruppe.</li>
+          <li><b>Uden adfærd:</b> modellen antager, at folk ikke ændrer adfærd, når skatterne ændres. Ved høje satser er det en væsentlig forenkling.</li>
+        </ul>
+      </section>
+      <h2 class="grp">Finansiering</h2>
+      <section class="ex" id="r2">
+  <h3>Formueskat på høje formuer</h3>
+  <p>En årlig skat på den del af en persons nettoformue, der ligger over fradraget (standard 10 mio. kr.).</p>
+  <dl class="facts"><div><dt>Standardfradrag</dt><dd>10.000.000 kr.</dd></div><div><dt>Standardsats</dt><dd>1 %</dd></div><div><dt>Interval</dt><dd>1 % – 2 %</dd></div><div><dt>Skyderens grænser</dt><dd>0 % – 7,5 %</dd></div><div><dt>Andel investering</dt><dd>100 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Modellen bruger formuefordelingen i 100 percentiler, hvor den øverste percentil er delt op i 10 undergrupper med stigende formue. For hver gruppe beregnes (formue − fradrag) × sats. Provenuet lægges sammen og omregnes til andel af BNP.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Forrykker balance mellem invesering og forbrug hvis ikke provenu anvendes på invesering</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Rammer kun de allerstørste formuer og dermed få personer.</li><li>Norske erfaringer (2021–24) viser ingen målbar effekt på investeringer i de berørte virksomheder.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Formue er svær at værdisætte, især unoterede selskaber.</li><li>Risiko for flytning og skatteplanlægning blandt de allerrigeste.</li><li>Provenuet svinger med aktiekurserne.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row2">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r3">
+  <h3>Ejendomsskat på avance ved salg</h3>
+  <p>Skat på gevinst ved salg, dvs. forskellen på prisen ved køb og salg. Ønskes der rabat for inflation eller forbedringer, kan fradraget sættes over 0. Beregnet som fuldt indfaset.</p>
+  <dl class="facts"><div><dt>Standardfradrag</dt><dd>0 kr.</dd></div><div><dt>Standardsats</dt><dd>42 %</dd></div><div><dt>Interval</dt><dd>42 % – 42 %</dd></div><div><dt>Andel investering</dt><dd>35 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Modellen antager en årlig værdistigning på 3,5 % over 20 år, lidt højere for dyre boliger. Gevinsten over fradraget beskattes med satsen og fordeles ud på årene. Resultatet korrigeres for andelen af husstande, der ejer bolig, og for antal voksne pr. bolig (faktorerne ½ og 60 % i regnearket).</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Forrykker balance mellem invesering og forbrug hvis ikke provenu anvendes på invesering</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Boligejere har haft store skattefri gevinster.</li><li>Kan dæmpe boligpriserne og gøre dem mere stabile.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Kan låse folk fast i boligen (man udskyder salg).</li><li>Rammer ældre boligejere med lav indkomst, hvis der ikke er lempelser.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row3">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r4">
+  <h3>Bred formueskat</h3>
+  <p>Formueskat med lavt fradrag sikrer et langt større provenu end en skat, der kun rammer de allerrigeste. Det er en årlig skat på nettoformue over et lavt fradrag (standard 250.000 kr.). Provenu fra de høje formuer (forslaget ovenfor) trækkes fra, så det ikke tælles dobbelt.</p>
+  <dl class="facts"><div><dt>Standardfradrag</dt><dd>250.000 kr.</dd></div><div><dt>Standardsats</dt><dd>1 %</dd></div><div><dt>Interval</dt><dd>1 % – 2 %</dd></div><div><dt>Skyderens grænser</dt><dd>0 % – 7,5 %</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Samme formuefordeling som ovenfor: (formue − fradrag) × sats for hver gruppe, minus det, der allerede er opkrævet via formueskatten på høje formuer.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Stort provenu med en lav sats.</li><li>Bredt grundlag gør skatten sværere at undgå.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Rammer også almindelige familier med pension eller friværdi.</li><li>Regnearket bemærker, at det kræver omfordeling for ikke at skabe fattigdom, og at det kun i begrænset omfang kan kombineres med ekstra indkomstskat.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row4">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r5">
+  <h3>Ekstra ejendomsskat (løbende)</h3>
+  <p>En årlig skat på boligens værdi over fradraget, oven i den nuværende ejendomsværdiskat.</p>
+  <dl class="facts"><div><dt>Standardfradrag</dt><dd>0 kr.</dd></div><div><dt>Standardsats</dt><dd>1 %</dd></div><div><dt>Interval</dt><dd>0,6 % – 1,8 %</dd></div><div><dt>Andel investering</dt><dd>35 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>For hver indkomstdecil: (gennemsnitlig boligværdi − fradrag) × sats, korrigeret med de samme faktorer for boligejerandel og voksne pr. bolig som avanceskatten.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Boliger kan ikke flytte, så skatten er svær at undgå.</li><li>OECD vurderer løbende ejendomsskatter som de mindst skadelige for vækst.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Betales uanset indkomst, hvilket kan presse folk med høj friværdi og lav indkomst.</li><li>Politisk upopulær, især i lyset af den seneste boligskattereform.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row5">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r6">
+  <h3>Ekstra moms med tilbagebetaling</h3>
+  <p>Højere moms på varer, bortset fra fødevarer, der sættes til 0 %. Fordi høje indkomster har et højere forbrug, betaler de mere i moms. Omfordeles provenuet, kan ordningen samlet set blive omfordelende. Omfordelingseffekten er begrænset, men mærkbar. Formålet er dog primært et mere grønt forbrug, især at gøre reparation og holdbarhed mere konkurrencedygtigt.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>100 %</dd></div><div><dt>Interval</dt><dd>25 % – 100 %</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Satsen er den ekstra moms som andel af prisen før den nye moms (100 % betyder, at momsbelagte varer koster dobbelt). Tilbagebetalingen sættes, så ordningen samlet går i nul. Det beløb, der tælles som finansiering, er nettobidraget fra dem, der betaler mere i ekstra moms, end de får tilbage. Modellen lader forbrugsandelen falde lidt, jo højere momsen er.</p>
+  <div class="warn"><b>Bemærk:</b> Modellen regner endnu ikke med 0 % moms på fødevarer. Den lægger den ekstra moms på en fast andel (¾) af forbruget og betaler hele merprovenuet tilbage som et lige stort beløb til alle (det beregnede fradrag).</div>
+  <p class="note"><b>Bemærkning i regnearket:</b> Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Svær at undgå og administrativt enkel.</li><li>Med tilbagebetalingen bliver den samlede effekt progressiv.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Meget høje satser giver grænsehandel og sort arbejde.</li><li>Prisstigningen kan skubbe inflation og lønkrav op.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row6">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r7">
+  <h3>Udligningsskat på indkomster over gennemsnittet</h3>
+  <p>En ekstra skat på bruttolønindkomst over fradraget (standard 400.000 kr.).</p>
+  <dl class="facts"><div><dt>Standardfradrag</dt><dd>400.000 kr.</dd></div><div><dt>Standardsats</dt><dd>1,55 %</dd></div><div><dt>Interval</dt><dd>0 % – 15 %</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>For hver decil: (bruttoløn − fradrag) × sats, dog mindst 0.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Tal er uden adfærd og især maksimalscenariet vil sndsynligvis have en del uheldige effekter (marginalskat på ~80%)</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Enkel og målrettet de højeste indkomster.</li><li>Kan bruges til at forbeholde den universelle skattelettelse til den lavere halvdel.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Regnearket bemærker, at maksimalscenariet giver marginalskatter på ca. 80 %.</li><li>Tallene er uden adfærd, og høje marginalskatter kan reducere arbejdsudbud og øge skattetænkning.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row7">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r8">
+  <h3>Luksusskat</h3>
+  <p>Medtaget for fuldstændighedens skyld, men ikke modelleret (provenu sat til 0).</p>
+  <dl class="facts"><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Ingen beregning. Regnearket bemærker, at luksusskatter ofte giver negativt provenu, fordi de koster arbejdspladser og omgås.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Relationship Between the Amount and Distribution of the Tax Burden and Tax Compliance</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Symbolsk og synlig.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Erfaringer (fx USA 1990) viser lavt eller negativt nettoprovenu.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row8">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r9">
+  <h3>Arve- og gaveskat</h3>
+  <p>En højere effektiv skat på arv og gaver. Den nuværende effektive sats er ca. 5 %.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>15 %</dd></div><div><dt>Interval</dt><dd>15 % – 30 %</dd></div><div><dt>Andel investering</dt><dd>100 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>For hver decil: formue × sats ÷ 50. Det svarer til, at formuen går i arv én gang på 50 år.</p>
+  <div class="warn"><b>Mulig fejl i regnearket:</b> Formlen i regnearket trækker 5 % fra formuen i kroner, ikke fra satsen: (formue − 5 %) × sats ÷ 50. Derfor regnes der med hele satsen og ikke kun stigningen over de nuværende 5 %. Er det meningen, at kun stigningen skal tælle, er provenuet overvurderet. Ved 15 % er det overvurderet med en tredjedel.</div>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Rammer ikke-optjent formue og kan begrænse arvelig ulighed.</li><li>Påvirker ikke den afdødes arbejdsindsats.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Familieejede virksomheder kan få svært ved generationsskifte.</li><li>Kan omgås med gaver i levende live og planlægning.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row9">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r10">
+  <h3>Indkomstbaseret egenbetaling for offentlige ydelser</h3>
+  <p>Personer med høje indkomster betaler selv en del af de offentlige serviceydelser, de bruger.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>1</dd></div><div><dt>Interval</dt><dd>1 – 1,25</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>For hver decil: forbrug af offentlige ydelser × min(100 %, indkomst ÷ (2 × (forbrug + 500.000))) opløftet i satsen. Satsen (1–1,25) er en eksponent. En højere eksponent sænker betalingen mest for de lave indkomster, så ordningen bliver mere progressiv og giver mindre provenu.</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Stort provenu uden at hæve skattesatser.</li><li>Bevarer adgangen for lave indkomster.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Bryder med princippet om universel, gratis velfærd.</li><li>Administrativt tungt og kan virke som en ekstra marginalskat.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row10">← Til forslaget i regnemaskinen</a></p>
+</section>
+      <h2 class="grp">Udgifter</h2>
+      <section class="ex" id="r17">
+  <h3>Universel skattelettelse</h3>
+  <p>Et fast beløb pr. skatteborger pr. år, fx som bundfradrag eller skattecheck.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>50.000 kr.</dd></div><div><dt>Interval</dt><dd>25.000 kr. – 50.000 kr.</dd></div><div><dt>Skyderens grænser</dt><dd>-25.000 kr. – 100.000 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb × 4,9 mio. skatteborgere, omregnet til andel af BNP. Kombineret med udligningsskatten kan lettelsen reelt forbeholdes den fattigste halvdel.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Fungerer bedst som bred lettelse da meget skarpe grænser risikerer klippesatser</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Enkel og løfter især lave indkomster relativt.</li><li>Regnearket bemærker, at en bred lettelse undgår skarpe grænser og klippekanter.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Dyr, fordi alle får den.</li><li>Tæller som forbrug, ikke investering.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row17">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r18">
+  <h3>Universel pensionsindbetaling (formueudligning)</h3>
+  <p>Et fast årligt beløb pr. skatteborger, indbetalt til opsparing, fx pension.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>15.000 kr.</dd></div><div><dt>Interval</dt><dd>5.000 kr. – 50.000 kr.</dd></div><div><dt>Andel investering</dt><dd>100 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb × 4,9 mio. skatteborgere. Tælles 100 % som investering/formue.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> fx gennem pension</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Udligner formueforskelle direkte.</li><li>Opsparing frem for forbrug.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Effekten for den enkelte kommer først på lang sigt.</li><li>Kræver en ny ordning og administration.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row18">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r19">
+  <h3>Ældrepleje ud over allerede afsatte midler</h3>
+  <p>Ekstra penge til ældrepleje oven i det, der allerede er budgetteret med.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>5.000 kr.</dd></div><div><dt>Interval</dt><dd>5.000 kr. – 15.000 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Ca. 10.000 kr. pr. skatteborger svarer til ca. 1,6 % af BNP. Nuværende forbrug er ca. 3,1 % af BNP. Det antages, at behovet pr. aldersgruppe fastholdes, og maksimalscenariet giver små forbedringer i forhold til i dag.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> nuværende forbrug ca 3,1% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Flere ældre gør, at udgiftspresset er reelt.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Penge alene løser ikke manglen på personale.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row19">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r20">
+  <h3>Sundhed for ældre ud over allerede afsatte midler</h3>
+  <p>Ekstra midler til sundhedsudgifter for en aldrende befolkning.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>5.000 kr.</dd></div><div><dt>Interval</dt><dd>5.000 kr. – 15.000 kr.</dd></div><div><dt>Andel investering</dt><dd>25 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Ca. 1,6 % af BNP pr. 10.000 kr. ved nuværende behov, men kun ca. en femtedel, hvis man antager sundere aldring. Nuværende forbrug er ca. 7 % af BNP. Tælles 25 % som investering.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> nuværende forbrug ca 7% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>OECD fremskriver stigende sundhedsudgifter frem mod 2040.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Stor usikkerhed om, hvor sund den fremtidige aldring bliver.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row20">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r21">
+  <h3>Sundhedspersonale og uddannelse</h3>
+  <p>Ca. 5–10.000 kr. mere om måneden til medarbejdere i ældrepleje og sundhed, eller flere hænder og ekstra uddannelseskapacitet.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>6.000 kr.</dd></div><div><dt>Interval</dt><dd>6.122 kr. – 12.000 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Minimumsværdien svarer til 10.000 kr. om måneden til ca. 250.000 ansatte.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> ca 5-10.000 mere pr måned til medarbejdere i ældrepleje og sundhed, eller flere hænder (eventuelt delvis kompensation til mdarbejdere for undebemanding), samt ekstra kapacitet til uddannelse</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Adresserer rekrutteringsproblemer direkte.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Lønstigninger i én sektor kan sprede sig til andre.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row21">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r22">
+  <h3>Fordobling af udgifter til mentalt helbred</h3>
+  <p>En fordobling af de offentlige udgifter til psykiatri og mental sundhed.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>3.125 kr.</dd></div><div><dt>Interval</dt><dd>3.125 kr. – 6.250 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Nuværende forbrug er ca. 0,5 % af BNP.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> nuværende forbrug ca 0.5% af GDP. </p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Stort udækket behov og ventelister.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Kræver flere fagfolk, som tager tid at uddanne.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row22">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r23">
+  <h3>Fordobling af udgifter til offentlig trafik</h3>
+  <p>En fordobling af de offentlige tilskud til kollektiv trafik.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>2.000 kr.</dd></div><div><dt>Interval</dt><dd>2.000 kr. – 4.000 kr.</dd></div><div><dt>Andel investering</dt><dd>50 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Tælles 50 % som investering.</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Grøn omstilling og bedre mobilitet uden bil.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Effekten afhænger af, om pengene går til drift, billetpriser eller nye strækninger.</li></ul></div>
+  </div>
+  <p class="src">Kilder: Sektorrapport for den kollektive trafik i Danmark 2024</p>
+  <p class="back"><a href="index.html#row23">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r24">
+  <h3>Opkøb af 25 % af landbrugsjorden</h3>
+  <p>Staten opkøber en fjerdedel af landbrugsjorden, med indfasning.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>375 kr.</dd></div><div><dt>Interval</dt><dd>375 kr. – 1.500 kr.</dd></div><div><dt>Andel investering</dt><dd>100 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Regnearket antager finansiering via et rentefrit lån fra Nationalbanken, der betales tilbage over 30 år. Tælles 100 % som investering.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Antages finansieret af rentefrit lån af nationlbanken, og betalt tilbage over 30 år</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Giver plads til natur, skov og klimatiltag.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Rentefri finansiering via Nationalbanken er næppe mulig under de nuværende regler.</li><li>Påvirker jordpriserne.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row24">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r25">
+  <h3>Udbygning af elnet og grøn energi</h3>
+  <p>Omtrent en fordobling af investeringerne i elnet og vedvarende energi.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>6.000 kr.</dd></div><div><dt>Interval</dt><dd>6.000 kr. – 12.000 kr.</dd></div><div><dt>Andel investering</dt><dd>100 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Tælles 100 % som investering.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Omtrent fordobling</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Elnettet er en flaskehals for elektrificeringen.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Meget af det finansieres i dag via elregningen, ikke over skatten.</li></ul></div>
+  </div>
+  <p class="src">Kilder: <a href="https://billigladeboks.dk/investering-i-eldistributionsnet/" target="_blank" rel="noopener">https://billigladeboks.dk/investering-i-eldistributionsnet/</a> · <a href="https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob" target="_blank" rel="noopener">https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob</a></p>
+  <p class="back"><a href="index.html#row25">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r26">
+  <h3>Forsvar</h3>
+  <p>Ekstra forsvarsudgifter.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>3.000 kr.</dd></div><div><dt>Interval</dt><dd>3.000 kr. – 30.000 kr.</dd></div><div><dt>Andel investering</dt><dd>25 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Tælles 25 % som investering.</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>NATO-forpligtelser og sikkerhedssituationen.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Lavt samfundsøkonomisk afkast i fredstid.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row26">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r27">
+  <h3>Økologisk mad via subsidier</h3>
+  <p>Tilskud til økologisk mad, delvist eller fuldt.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>1</dd></div><div><dt>Interval</dt><dd>7 – 6000</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Regnearket bemærker, at 7 % svarer til en fordobling af udgifterne til mad.</p>
+  <div class="warn"><b>Mulig fejl i regnearket:</b> Satsen ganges i regnearket med 4,9 mio. som kroner, ikke som procent. En sats på 7 giver altså kun 7 kr. pr. skatteborger, og forslaget er reelt næsten gratis i modellen. Det ser ud til, at enheden mangler at blive omregnet.</div>
+  <p class="note"><b>Bemærkning i regnearket:</b> De 7% svarer til en fordobling af udgifterne til mad</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Mindre pesticidbelastning og bedre dyrevelfærd.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Dyrt pr. effekt sammenlignet med direkte regulering.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row27">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r28">
+  <h3>Lavere forbrug af kød</h3>
+  <p>En stor afgift på kød (fx 50/100/200 kr. pr. kg for kylling/gris/okse), hvor provenuet returneres til borgerne. Ved at opkræve høje afgifter, men returnere provenuet til borgerne, bliver den umiddelbare effekt begrænset, men valgfri adfærd kan have stor effekt.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>600 kr.</dd></div><div><dt>Interval</dt><dd>600 kr. – 6.000 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio. Regnearket bemærker, at forslaget er næsten gratis, men har begrænset opbakning.</p>
+  <p class="note"><b>Bemærkning i regnearket:</b> Næsten gratis men begrænset opbakning</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Stor klimaeffekt pr. krone.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Upopulær og rammer forbrugsvaner direkte.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row28">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r29">
+  <h3>Udviklingsbistand</h3>
+  <p>Ekstra udviklingsbistand.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>600 kr.</dd></div><div><dt>Interval</dt><dd>2.400 kr. – 6.000 kr.</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Beløb pr. skatteborger × 4,9 mio.</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>Stor effekt pr. krone på global fattigdom.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Effekten afhænger meget af, hvordan pengene bruges.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row29">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r30">
+  <h3>Pensionsalder i 2041</h3>
+  <p>Pensionsalderen i 2041. En lavere pensionsalder koster, en højere sparer penge.</p>
+  <dl class="facts"><div><dt>Standardsats</dt><dd>68,5 år</dd></div><div><dt>Interval</dt><dd>67 år – 70 år</dd></div><div><dt>Andel investering</dt><dd>0 %</dd></div></dl>
+  <h4>Sådan regner modellen</h4>
+  <p>Hvert år under 70 koster 5.000 kr. pr. skatteborger pr. år. Det ganges med 4,9 mio. og omregnes til andel af BNP.</p>
+  <div class="pc">
+    <div><h4>Argumenter for</h4><ul><li>En lavere alder giver mere retfærdighed for fysisk nedslidte.</li></ul></div>
+    <div><h4>Argumenter imod</h4><ul><li>Færre i arbejde og højere udgifter.</li></ul></div>
+  </div>
+  <p class="back"><a href="index.html#row30">← Til forslaget i regnemaskinen</a></p>
+</section>
+    </div>
+  </div>
+</main>
+</body>
+</html>

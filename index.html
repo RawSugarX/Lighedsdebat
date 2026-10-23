@@ -8,24 +8,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f5f0; --panel:#ffffff; --ink:#1d1d1b; --muted:#6b6862; --line:#e3dfd6;
+  /* Page background: change --bg to the exact Ø purple if needed */
+  --bg:#5b2a86; --on-bg:#ffffff; --on-bg-muted:#e2d5ee; --tint:#f4eff8;
+  --panel:#ffffff; --ink:#1d1d1b; --muted:#6b6862; --line:#e3dfd6;
   --accent:#1f5f8b; --accent-soft:#e3eef6; --pos:#2e7d4f; --neg:#b3412f; --warn:#9a6a00;
   --bar-a:#1f5f8b; --bar-b:#c98a2e;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#151617; --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
+    --bg:#26163a; --on-bg:#f1ecf6; --on-bg-muted:#c2b3d3; --tint:#272330;
+    --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
     --accent:#6fb0dc; --accent-soft:#1f3242; --pos:#6cc490; --neg:#e98a78; --warn:#e2b54f;
     --bar-a:#6fb0dc; --bar-b:#e2b05f;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#151617; --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
+  --bg:#26163a; --on-bg:#f1ecf6; --on-bg-muted:#c2b3d3; --tint:#272330;
+    --panel:#1e2022; --ink:#ecebe7; --muted:#a3a09a; --line:#33363a;
   --accent:#6fb0dc; --accent-soft:#1f3242; --pos:#6cc490; --neg:#e98a78; --warn:#e2b54f;
   --bar-a:#6fb0dc; --bar-b:#e2b05f;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--on-bg);font:15px/1.5 Inter,system-ui,sans-serif}
 main{max-width:1080px;margin:0 auto;padding:32px 16px 120px}
 h1{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:clamp(28px,5vw,42px);line-height:1.1;margin:0 0 8px}
 h2{font-family:"Source Serif 4",Georgia,serif;font-weight:600;font-size:24px;margin:40px 0 4px}
@@ -56,6 +60,7 @@ button:disabled{opacity:.5;cursor:default}
 .ctl .line{display:flex;gap:8px;align-items:center}
 .ctl input[type=range]{flex:1;accent-color:var(--accent);min-width:0}
 .ctl input[type=number]{width:96px}
+.ctl input.bin{width:150px;text-align:right;font-variant-numeric:tabular-nums}
 .ctl .unit{font-size:12px;color:var(--muted);width:56px}
 .ctl .lbl{font-size:11px;color:var(--muted);width:52px}
 .ctl .range{font-size:11px;color:var(--muted)}
@@ -85,6 +90,26 @@ th{font-size:12px;color:var(--muted);font-weight:500}
 .msg{font-size:14px;margin-top:10px;min-height:1.2em}
 .confirm{display:none;margin-top:10px;padding:10px 12px;border-radius:6px;background:var(--accent-soft)}
 .confirm.show{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.topnav{display:flex;gap:16px;margin:0 0 16px;font-size:14px}
+.topnav a{color:var(--accent);text-decoration:none}
+.topnav a[aria-current]{color:var(--ink);font-weight:600}
+.row .more{font-size:13px;margin-top:4px}
+.row .more a{color:var(--accent);text-decoration:none}
+.row{scroll-margin-top:16px}
+/* text on the purple background vs. inside white panels */
+.row,.card,.chart,.tablewrap,.savebox,.combo ul,.summary,.ex,.method{color:var(--ink)}
+main > .lede,.viewing,main > .toolbar .field label,nav.toc h4{color:var(--on-bg-muted)}
+.viewing b{color:var(--on-bg)}
+main > hr{border-top-color:rgba(255,255,255,.25)}
+.topnav a{color:var(--on-bg-muted)!important}
+.topnav a[aria-current]{color:var(--on-bg)!important}
+main > .toolbar button.ghost{color:var(--on-bg);border-color:var(--on-bg)}
+.row details.dt{grid-column:1/-1;margin-top:-4px}
+.row details.dt summary{cursor:pointer;font-size:13px;color:var(--accent);width:max-content}
+.dtscroll{overflow-x:auto;margin-top:8px}
+.row .dtw table{font-size:13px}
+.row .dtw tr.tot td{font-weight:600;border-top:2px solid var(--line)}
+.dtn{font-size:12px;color:var(--muted);margin:6px 0 0}
 .badge{font-size:11px;padding:2px 6px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
 @media (max-width:820px){
   .row{grid-template-columns:minmax(0,1fr)}
@@ -95,6 +120,7 @@ th{font-size:12px;color:var(--muted);font-weight:500}
 </head>
 <body>
 <main>
+  <nav class="topnav"><a href="index.html" aria-current="page">Regnemaskine</a><a href="forslag.html">Forklaringer</a></nav>
   <h1>Lighedsdebat</h1>
   <p class="lede">Juster satser og fradrag for finansiering og udgifter, og se hvordan regnestykket går op. Alle tal, satser og formler er overført fra regnearket <em>Grand scheme of things</em>. Tal er i pct. af BNP (BNP ≈ 3.119 mia. kr., 4,9 mio. skatteborgere) og er uden adfærdseffekter.</p>
   <p class="lede" id="storeNote"></p>
@@ -159,8 +185,7 @@ th{font-size:12px;color:var(--muted);font-weight:500}
 const API_URL = 'https://script.google.com/macros/s/AKfycbza_7wL5mp1HbG7kEEK6b5VC0kRpR74eq9jZSaV3MaxgxJXKk8u6SyIwAVCppL7oxis/exec';
 // ==========================
 
-const DATA = {"formueA": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], "formueC": [-872193.0, -482749.0, -298767.0, -189096.0, -115815.0, -64921.0, -28558.0, -4399.0, 124.0, 3386.0, 7509.0, 12245.0, 17717.0, 23840.0, 30545.0, 37716.0, 45519.0, 53736.0, 62399.0, 71609.0, 81333.0, 91672.0, 102429.0, 113825.0, 125961.0, 138997.0, 152861.0, 167602.0, 183415.0, 200522.0, 218664.0, 238346.0, 259208.0, 281813.0, 305902.0, 331357.0, 357980.0, 386109.0, 415639.0, 445909.0, 477419.0, 510054.0, 543491.0, 577705.0, 612805.0, 648823.0, 685738.0, 722981.0, 761367.0, 800814.0, 840955.0, 882485.0, 925052.0, 968315.0, 1012727.0, 1058337.0, 1104688.0, 1152433.0, 1201416.0, 1251876.0, 1303076.0, 1355881.0, 1410782.0, 1466531.0, 1524255.0, 1584095.0, 1646158.0, 1709949.0, 1776282.0, 1844615.0, 1916124.0, 1990803.0, 2068078.0, 2149449.0, 2234682.0, 2323308.0, 2417454.0, 2516735.0, 2620525.0, 2731752.0, 2849922.0, 2975605.0, 3111587.0, 3256352.0, 3414596.0, 3586938.0, 3776071.0, 3983306.0, 4213311.0, 4475610.0, 4775332.0, 5125942.0, 5541032.0, 6054893.0, 6716353.0, 7621223.0, 9005208.0, 11506403.0, 18261779.0], "ejendomC": [577814.0, 584445.6, 704047.4, 1100569.4, 1710559.0, 2346379.0, 3130142.0, 4102788.4, 5383584.4, 10513709.4], "momsB": [101181.0, 182331.0, 213817.0, 245750.0, 278084.0, 311118.0, 348230.0, 395277.0, 466658.0, 852980.0], "momsC": [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.4], "indkB": [131295.0, 256979.6, 308465.0, 358406.0, 409522.0, 467825.0, 524325.0, 584013.0, 628402.0, 1064726.0], "egenB": [140000.0, 267001.0, 319005.0, 372026.0, 425129.0, 482644.0, 545221.0, 623417.0, 731627.0, 1493479.0], "egenC": [123000.0, 135000.0, 130500.0, 135000.0, 120000.0, 115500.0, 97500.0, 90000.0, 82500.0, 70500.0], "dispB": [96295.0, 176981.0, 208472.0, 238441.0, 269697.0, 301829.0, 337862.0, 383209.0, 452178.0, 834074.0], "rows": {"2": {"label": "Finansiering. Formueskat på høje formuer", "B": 10000000.0, "C": 0.01, "D": 0.01, "E": 0.015, "H": 1.0, "note": "Forrykker balance mellem investering og forbrug hvis ikke provenu anvendes på investering", "src": []}, "3": {"label": "Finansiering. Ejendomsskat avance (når fuldt indfaset)", "B": 0.0, "C": 0.42, "D": 0.42, "E": 0.42, "H": 0.35, "note": "Forrykker balance mellem investering og forbrug hvis ikke provenu anvendes på investering", "src": []}, "4": {"label": "Finansiering. Formueskat på almindelige formuer (ex provenu fra høje formuer)", "B": 250000.0, "C": 0.01, "D": 0.01, "E": 0.02, "H": 0.0, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "5": {"label": "Finansiering. Ekstra ejendomsskat", "B": 0.0, "C": 0.01, "D": 0.006, "E": 0.018, "H": 0.35, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "6": {"label": "Finansering Ekstra moms", "B": 49329.75849, "C": 1.0, "D": 0.25, "E": 1.0, "H": 0.0, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "7": {"label": "Finansiering. 7,5-15% udligningsskat over 400.000", "B": 400000.0, "C": 0.0155, "D": 0.0, "E": 0.15, "H": 0.0, "note": "Tal er uden adfærd og især maksimalscenariet vil sndsynligvis have en del uheldige effekter (marginalskat på ~80%)", "src": []}, "8": {"label": "luksusskat : ofte negativ som følge af tabte arbejdspladser og omgåelse", "B": null, "C": null, "D": null, "E": null, "H": 0.0, "note": "Relationship Between the Amount and Distribution of the Tax Burden and Tax Compliance", "src": []}, "9": {"label": "arveskat (og gave), effektiv sats, nuværende ca 5%", "B": null, "C": 0.15, "D": 0.15, "E": 0.3, "H": 1.0, "note": null, "src": []}, "10": {"label": "Finansiering: indkomstbaseret egenbetaling af serviceydelser", "B": null, "C": 1.0, "D": 1.0, "E": 1.25, "H": 0.0, "note": null, "src": []}, "17": {"label": "Universel skattelettelse  (brug udligningsskat til at forbeholde den til den fattigste halvdel)", "B": null, "C": 50000.0, "D": 25000.0, "E": 50000.0, "H": 0.0, "note": "Fungerer bedst som bred lettelse da meget skarpe grænser risikerer klippesatser", "src": []}, "18": {"label": "Udligning af formue/universel pensionsindbetaling", "B": null, "C": 15000.0, "D": 5000.0, "E": 50000.0, "H": 1.0, "note": "fx gennem pension", "src": []}, "19": {"label": "Ældrepleje udover allerede afsatte midler (ca 1.6% bnp/10.000 pr skatteborger)", "B": null, "C": 5000.0, "D": 5000.0, "E": 15000.0, "H": 0.0, "note": "nuværende forbrug ca 3,1% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu", "src": ["7476501_EN_autre_document_travail_service_part1_v7.pdf"]}, "20": {"label": "Ældre sundhed udover allerede afsatte midler (ca 1.6% bnp/10.000 pr skatteborger ved nuværende behov, ca 1/5 ved forudsætning om sundere aldring)", "B": null, "C": 5000.0, "D": 5000.0, "E": 15000.0, "H": 0.25, "note": "nuværende forbrug ca 7% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu", "src": ["Fiscal Sustainability of Health Systems (EN)"]}, "21": {"label": "Ekstra midler til sundhedspersonale, samt oplæring (ca 10K pr måned i minimum)", "B": null, "C": 6000.0, "D": 6122.44898, "E": 12000.0, "H": 0.0, "note": "ca 5-10.000 mere pr måned til medarbejdere i ældrepleje og sundhed, eller flere hænder (eventuelt delvis kompensation til mdarbejdere for undebemanding), samt ekstra kapacitet til uddannelse", "src": []}, "22": {"label": "Fordobling af udgifter til mentalt helbred", "B": null, "C": 3125.0, "D": 3125.0, "E": 6250.0, "H": 0.0, "note": "nuværende forbrug ca 0.5% af GDP. ", "src": ["EPA_2302409 1..4"]}, "23": {"label": "Fordobling af udgifter til offentlig trafik", "B": null, "C": 2000.0, "D": 2000.0, "E": 4000.0, "H": 0.5, "note": null, "src": ["Sektorrapport for den kollektive trafik i Danmark 2024"]}, "24": {"label": "opkøb af 25% af landbrugsjord inkl indfasning", "B": null, "C": 375.0, "D": 375.0, "E": 1500.0, "H": 1.0, "note": "Antages finansieret af rentefrit lån af nationlbanken, og betalt tilbage over 30 år", "src": []}, "25": {"label": "Udbygning af elnet og grøn energi", "B": null, "C": 6000.0, "D": 6000.0, "E": 12000.0, "H": 1.0, "note": "Omtrent fordobling", "src": ["https://billigladeboks.dk/investering-i-eldistributionsnet/", "https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob"]}, "26": {"label": "Forsvar", "B": null, "C": 3000.0, "D": 3000.0, "E": 30000.0, "H": 0.25, "note": null, "src": []}, "27": {"label": "Økologisk mad (via subsidier, delvist eller fuldt)", "B": null, "C": 1.0, "D": 6000.0, "E": 7.0, "H": 0.0, "note": "De 7% svarer til en fordobling af udgifterne til mad", "src": []}, "28": {"label": "Plantebaseret mad (via massive afgift på kød der omfordeles (fx 50/100/200 kr pr kg kylling/gris/okse))", "B": null, "C": 600.0, "D": 600.0, "E": 6000.0, "H": 0.0, "note": "Næsten gratis men begrænset opbakning", "src": []}, "29": {"label": "Udviklingsbistand", "B": null, "C": 600.0, "D": 6000.0, "E": 2400.0, "H": 0.0, "note": null, "src": []}, "30": {"label": "pensionsalder i 2041", "B": null, "C": 68.5, "D": 67.0, "E": 70.0, "H": null, "note": null, "src": []}}}
-;
+const DATA = {"formueA": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 4.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 6.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 7.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 9.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0], "formueC": [-872193.0, -482749.0, -298767.0, -189096.0, -115815.0, -64921.0, -28558.0, -4399.0, 124.0, 3386.0, 7509.0, 12245.0, 17717.0, 23840.0, 30545.0, 37716.0, 45519.0, 53736.0, 62399.0, 71609.0, 81333.0, 91672.0, 102429.0, 113825.0, 125961.0, 138997.0, 152861.0, 167602.0, 183415.0, 200522.0, 218664.0, 238346.0, 259208.0, 281813.0, 305902.0, 331357.0, 357980.0, 386109.0, 415639.0, 445909.0, 477419.0, 510054.0, 543491.0, 577705.0, 612805.0, 648823.0, 685738.0, 722981.0, 761367.0, 800814.0, 840955.0, 882485.0, 925052.0, 968315.0, 1012727.0, 1058337.0, 1104688.0, 1152433.0, 1201416.0, 1251876.0, 1303076.0, 1355881.0, 1410782.0, 1466531.0, 1524255.0, 1584095.0, 1646158.0, 1709949.0, 1776282.0, 1844615.0, 1916124.0, 1990803.0, 2068078.0, 2149449.0, 2234682.0, 2323308.0, 2417454.0, 2516735.0, 2620525.0, 2731752.0, 2849922.0, 2975605.0, 3111587.0, 3256352.0, 3414596.0, 3586938.0, 3776071.0, 3983306.0, 4213311.0, 4475610.0, 4775332.0, 5125942.0, 5541032.0, 6054893.0, 6716353.0, 7621223.0, 9005208.0, 11506403.0, 18261779.0], "ejendomC": [577814.0, 584445.6, 704047.4, 1100569.4, 1710559.0, 2346379.0, 3130142.0, 4102788.4, 5383584.4, 10513709.4], "momsB": [101181.0, 182331.0, 213817.0, 245750.0, 278084.0, 311118.0, 348230.0, 395277.0, 466658.0, 852980.0], "momsC": [0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.4], "indkB": [131295.0, 256979.6, 308465.0, 358406.0, 409522.0, 467825.0, 524325.0, 584013.0, 628402.0, 1064726.0], "egenB": [140000.0, 267001.0, 319005.0, 372026.0, 425129.0, 482644.0, 545221.0, 623417.0, 731627.0, 1493479.0], "egenC": [123000.0, 135000.0, 130500.0, 135000.0, 120000.0, 115500.0, 97500.0, 90000.0, 82500.0, 70500.0], "dispB": [96295.0, 176981.0, 208472.0, 238441.0, 269697.0, 301829.0, 337862.0, 383209.0, 452178.0, 834074.0], "rows": {"2": {"label": "Finansiering. Formueskat på høje formuer", "B": 10000000.0, "C": 0.01, "D": 0.01, "E": 0.02, "H": 1.0, "note": "Forrykker balance mellem invesering og forbrug hvis ikke provenu anvendes på invesering", "src": []}, "3": {"label": "Ejendomsskat på avance ved salg (når fuldt indfaset)", "B": 0.0, "C": 0.42, "D": 0.42, "E": 0.42, "H": 0.35, "note": "Forrykker balance mellem invesering og forbrug hvis ikke provenu anvendes på invesering", "src": []}, "4": {"label": "Finansiering. Formueskat på almindelige formuer (ex provenu fra høje formuer)", "B": 250000.0, "C": 0.01, "D": 0.01, "E": 0.02, "H": 0.0, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "5": {"label": "Finansiering. Ekstra ejendomsskat", "B": 0.0, "C": 0.01, "D": 0.006, "E": 0.018, "H": 0.35, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "6": {"label": "Ekstra moms med tilbagebetaling", "B": 49329.75849, "C": 1.0, "D": 0.25, "E": 1.0, "H": 0.0, "note": "Forudsætter omfordeling af provenu for ikke at skabe fattigdom kan kun i meget begrænset omfang kombineres med ekstra indkomstskat", "src": []}, "7": {"label": "Udligningsskat på indkomster over gennemsnittet", "B": 400000.0, "C": 0.0155, "D": 0.0, "E": 0.15, "H": 0.0, "note": "Tal er uden adfærd og især maksimalscenariet vil sndsynligvis have en del uheldige effekter (marginalskat på ~80%)", "src": []}, "8": {"label": "luksusskat : ofte negativ som følge af tabte arbejdspladser og omgåelse", "B": null, "C": null, "D": null, "E": null, "H": 0.0, "note": "Relationship Between the Amount and Distribution of the Tax Burden and Tax Compliance", "src": []}, "9": {"label": "arveskat (og gave), effektiv sats, nuværende ca 5%", "B": null, "C": 0.15, "D": 0.15, "E": 0.3, "H": 1.0, "note": null, "src": []}, "10": {"label": "Finansiering: indkomstbaseret egenbetaling af serviceydelser", "B": null, "C": 1.0, "D": 1.0, "E": 1.25, "H": 0.0, "note": null, "src": []}, "17": {"label": "Universel skattelettelse  (brug udligningsskat til at forbeholde den til den fattigste halvdel)", "B": null, "C": 50000.0, "D": 25000.0, "E": 50000.0, "H": 0.0, "note": "Fungerer bedst som bred lettelse da meget skarpe grænser risikerer klippesatser", "src": []}, "18": {"label": "Udligning af formue/universel pensionsindbetaling", "B": null, "C": 15000.0, "D": 5000.0, "E": 50000.0, "H": 1.0, "note": "fx gennem pension", "src": []}, "19": {"label": "Ældrepleje udover allerede afsatte midler (ca 1.6% bnp/10.000 pr skatteborger)", "B": null, "C": 5000.0, "D": 5000.0, "E": 15000.0, "H": 0.0, "note": "nuværende forbrug ca 3,1% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu", "src": []}, "20": {"label": "Ældre sundhed udover allerede afsatte midler (ca 1.6% bnp/10.000 pr skatteborger ved nuværende behov, ca 1/5 ved forudsætning om sundere aldring)", "B": null, "C": 5000.0, "D": 5000.0, "E": 15000.0, "H": 0.25, "note": "nuværende forbrug ca 7% af GDP. Antager nuværende fordeling af behov pr aldersgruppe fastholdes, maxscenarie indebærer små forbbedringer vs nu", "src": []}, "21": {"label": "Ekstra midler til sundhedspersonale, samt oplæring (ca 10K pr måned i minimum)", "B": null, "C": 6000.0, "D": 6122.44898, "E": 12000.0, "H": 0.0, "note": "ca 5-10.000 mere pr måned til medarbejdere i ældrepleje og sundhed, eller flere hænder (eventuelt delvis kompensation til mdarbejdere for undebemanding), samt ekstra kapacitet til uddannelse", "src": []}, "22": {"label": "Fordobling af udgifter til mentalt helbred", "B": null, "C": 3125.0, "D": 3125.0, "E": 6250.0, "H": 0.0, "note": "nuværende forbrug ca 0.5% af GDP. ", "src": []}, "23": {"label": "Fordobling af udgifter til offentlig trafik", "B": null, "C": 2000.0, "D": 2000.0, "E": 4000.0, "H": 0.5, "note": null, "src": ["Sektorrapport for den kollektive trafik i Danmark 2024"]}, "24": {"label": "opkøb af 25% af landbrugsjord inkl indfasning", "B": null, "C": 375.0, "D": 375.0, "E": 1500.0, "H": 1.0, "note": "Antages finansieret af rentefrit lån af nationlbanken, og betalt tilbage over 30 år", "src": []}, "25": {"label": "Udbygning af elnet og grøn energi", "B": null, "C": 6000.0, "D": 6000.0, "E": 12000.0, "H": 1.0, "note": "Omtrent fordobling", "src": ["https://billigladeboks.dk/investering-i-eldistributionsnet/", "https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob"]}, "26": {"label": "Forsvar", "B": null, "C": 3000.0, "D": 3000.0, "E": 30000.0, "H": 0.25, "note": null, "src": []}, "27": {"label": "Økologisk mad (via subsidier, delvist eller fuldt)", "B": null, "C": 1.0, "D": 6000.0, "E": 7.0, "H": 0.0, "note": "De 7% svarer til en fordobling af udgifterne til mad", "src": []}, "28": {"label": "Lavere forbrug af kød", "B": null, "C": 600.0, "D": 600.0, "E": 6000.0, "H": 0.0, "note": "Næsten gratis men begrænset opbakning", "src": []}, "29": {"label": "Udviklingsbistand", "B": null, "C": 600.0, "D": 6000.0, "E": 2400.0, "H": 0.0, "note": null, "src": []}, "30": {"label": "pensionsalder i 2041", "B": null, "C": 68.5, "D": 67.0, "E": 70.0, "H": null, "note": null, "src": []}}};
 
 // Port of the "Grand scheme of things" spreadsheet model.
 // B = {row: fradrag}, C = {row: valgt sats}. Returns per-row F (valgt scenarie), G (max), totals and decile table.
@@ -210,11 +235,8 @@ function computeModel(D, B, C) {
   const mD = D.momsB.map((b, i) => b * (D.momsC[i] * 3 / 4) * 0.2);
   const mE = D.momsB.map(b => Math.max(0.5, 1.01 - (b + 40000 * C[6] / 0.25 - 40000) / 950000));
   const B6 = (sum(D.momsB.map((b, i) => b * mE[i])) * k - sum(mD)) / (10 - k * sum(mE));
-  const mH = D.momsB.map((b, i) => {
-    const f = b + B6;
-    const g = f * 0.75 * mE[i] * (1 - 1 / (1 + C[6]));
-    return -(f - b - g + mD[i]);
-  });
+  const mG = D.momsB.map((b, i) => (b + B6) * 0.75 * mE[i] * (1 - 1 / (1 + C[6])));
+  const mH = D.momsB.map((b, i) => -((b + B6) - b - mG[i] + mD[i]));
   F[6] = sum(mH.map(h => Math.max(0, h))) * POP / GDP2;
 
   // --- udligningsskat (income)
@@ -259,7 +281,14 @@ function computeModel(D, B, C) {
     return { disp, tax, ny, welfare, daily: ny - Hx + K + P + O };
   });
 
-  return { B6, F, G, F12, F13, F14, F15, G12, G13, G14, G15, balance, deciles };
+  const detail = {
+    2: { base: decWealth, tax: decJ }, 4: { base: decWealth, tax: decK }, 9: { base: decWealth, tax: decL },
+    3: { base: D.ejendomC, tax: eD }, 5: { base: D.ejendomC, tax: eE },
+    6: { base: D.momsB, now: mD, nw: mG, back: B6, tax: mH },
+    7: { base: D.indkB, tax: iE },
+    10: { base: D.egenB, use: D.egenC, tax: pD },
+  };
+  return { B6, F, G, F12, F13, F14, F15, G12, G13, G14, G15, balance, deciles, detail };
 }
 
 
@@ -332,10 +361,22 @@ function medianState(){
   return {B,C};
 }
 
+// ---- kroner input formatting (1.000.000) ----
+const fmtKr = v => nf0.format(Math.round(v));
+const parseKr = s => parseFloat(String(s).replace(/\s/g,'').replace(/\./g,'').replace(',','.'));
+document.addEventListener('change',e=>{const t=e.target; if(t.dataset&&t.dataset.b&&t.dataset.b!=='6'){const v=parseKr(t.value); if(isFinite(v)) t.value=fmtKr(v);}});
+
 // ---- build rows ----
-const RANGE_FIX={27:[0,7]};  // sheet has min 6000 / max 7 here; treated as 0–7 %
+// Interval shown in text (and used for the "max" scenario) comes from the sheet's min/max.
+const TEXT_FIX={27:[0,7]};  // sheet has min 6000 / max 7 here; treated as 0–7 %
+function textRange(r){
+  if(TEXT_FIX[r]) return TEXT_FIX[r];
+  return [R[r].D,R[r].E].filter(v=>typeof v==='number').sort((a,b)=>a-b);
+}
+// Slider limits can be wider than the text interval.
+const SLIDER_FIX={2:[0,0.075],4:[0,0.075],17:[-25000,100000]};
 function sliderRange(r){
-  if(RANGE_FIX[r]) return RANGE_FIX[r];
+  if(SLIDER_FIX[r]) return SLIDER_FIX[r];
   const vals=[R[r].D,R[r].E,R[r].C].filter(v=>typeof v==='number');
   let lo=Math.min(...vals), hi=Math.max(...vals);
   if(lo===hi){lo=0;hi=hi*2||1;}
@@ -346,19 +387,21 @@ function rowHTML(r){
   let ctl='';
   if(hasB){
     const ro = r===6;
-    ctl+=`<div class="line"><span class="lbl">Fradrag</span><input type="number" ${ro?'readonly class="ro" tabindex="-1"':''} data-b="${r}" step="any" aria-label="Fradrag"><span class="unit">kr${ro?' (beregnet)':''}</span></div>`;
+    ctl+=`<div class="line"><span class="lbl">Fradrag</span><input type="text" inputmode="numeric" class="bin${ro?' ro':''}" ${ro?'readonly tabindex="-1"':''} data-b="${r}" aria-label="Fradrag"><span class="unit">kr${ro?' (beregnet)':''}</span></div>`;
   }
   if(hasC){
     const [lo,hi]=sliderRange(r), s=scale(r);
     ctl+=`<div class="line"><span class="lbl">Sats</span><input type="range" data-cr="${r}" min="${lo*s}" max="${hi*s}" step="${(hi-lo)*s/200}" aria-label="Sats skyder"><input type="number" data-c="${r}" step="any" aria-label="Sats"><span class="unit">${UNIT(r)}</span></div>`;
-    ctl+=`<div class="range">Min ${nf2.format(lo*s)} · Max ${nf2.format(hi*s)}${row.H?` · ${nf0.format(row.H*100)} % investering`:''}</div>`;
+    const [tlo,thi]=textRange(r);
+    ctl+=`<div class="range">Interval ${nf2.format(tlo*s)}–${nf2.format(thi*s)}${row.H?` · ${nf0.format(row.H*100)} % investering`:''}</div>`;
   }
   if(!hasC && !hasB) ctl='<div class="range">Ingen justerbar sats</div>';
   const src=(row.src||[]).map(x=>/^https?:/.test(x)?`<a href="${esc(x)}" target="_blank" rel="noopener">${esc(x)}</a>`:esc(x)).join(' · ');
-  return `<div class="row">
-    <div><div class="t">${esc(cleanLabel(row.label))}</div>${row.note?`<div class="note">${esc(row.note)}</div>`:''}${src?`<div class="src">Kilde: ${src}</div>`:''}</div>
+  return `<div class="row" id="row${r}">
+    <div><div class="t">${esc(cleanLabel(row.label))}</div>${row.note?`<div class="note">${esc(row.note)}</div>`:''}${src?`<div class="src">Kilde: ${src}</div>`:''}<div class="more"><a href="forslag.html#r${r}">Læs mere om forslaget →</a></div></div>
     <div class="ctl">${ctl}</div>
     <div class="out"><div class="v" data-f="${r}"></div><div class="s" data-fb="${r}"></div><div class="s" data-g="${r}"></div></div>
+    ${r!==8?`<details class="dt"><summary>Vis tabel</summary><div class="dtw" data-t="${r}"></div></details>`:''}
   </div>`;
 }
 document.getElementById('finRows').innerHTML = FIN.map(rowHTML).join('');
@@ -366,14 +409,14 @@ document.getElementById('spRows').innerHTML = SP.map(rowHTML).join('');
 
 const $$ = s => document.querySelectorAll(s);
 function fillInputs(){
-  $$('[data-b]').forEach(el=>{const r=+el.dataset.b; if(r!==6) el.value=+state.B[r].toFixed(2);});
+  $$('[data-b]').forEach(el=>{const r=+el.dataset.b; if(r!==6) el.value=fmtKr(state.B[r]);});
   $$('[data-c]').forEach(el=>{const r=+el.dataset.c; el.value=+(state.C[r]*scale(r)).toFixed(4);});
   $$('[data-cr]').forEach(el=>{const r=+el.dataset.cr; const v=state.C[r]*scale(r);
     if(v<+el.min) el.min=v; if(v>+el.max) el.max=v; el.value=v;});
 }
 document.addEventListener('input',e=>{
   const t=e.target;
-  if(t.dataset.b){ const v=parseFloat(t.value); if(isFinite(v)){state.B[+t.dataset.b]=v; markEdited(); render();} }
+  if(t.dataset.b){ const v=parseKr(t.value); if(isFinite(v)){state.B[+t.dataset.b]=v; markEdited(); render();} }
   if(t.dataset.c||t.dataset.cr){
     const r=+(t.dataset.c||t.dataset.cr), v=parseFloat(t.value); if(!isFinite(v)) return;
     state.C[r]=v/scale(r);
@@ -387,7 +430,7 @@ function markEdited(){ if(!viewing.endsWith('*')) { viewing = viewing+'*'; updat
 // ---- render ----
 function render(){
   const o = computeModel(DATA,state.B,state.C);
-  const b6=document.querySelector('[data-b="6"]'); if(b6) b6.value=Math.round(o.B6);
+  const b6=document.querySelector('[data-b="6"]'); if(b6) b6.value=fmtKr(o.B6);
   for(const r of FIN.concat(SP)){
     const f=document.querySelector(`[data-f="${r}"]`); if(!f) continue;
     f.textContent=pct(o.F[r]);
@@ -410,7 +453,44 @@ function render(){
      <div><div class="k">Balance</div><div class="n ${cls}">${pct(bal)} <span style="font-weight:400;font-size:13px">(${bn(bal)})</span></div></div>
      <div style="margin-left:auto;font-size:13px;color:var(--muted)">${esc(viewingLabel())}</div>`;
   renderDeciles(o.deciles);
+  renderDetails(o);
 }
+const DT_HEAD = {
+  2:['Gns. formue','Formueskat'], 4:['Gns. formue','Bred formueskat'], 9:['Gns. formue','Arveskat'],
+  3:['Gns. boligværdi','Avanceskat'], 5:['Gns. boligværdi','Ekstra ejendomsskat'],
+  7:['Bruttoløn','Udligningsskat'], 10:['Indkomst','Egenbetaling'],
+};
+function renderDetails(o){
+  const k=v=>nf0.format(Math.round(v)+0);
+  document.querySelectorAll('[data-t]').forEach(el=>{
+    const r=+el.dataset.t, d=o.detail[r];
+    let head, rows, foot, note='';
+    if(r===6){
+      head=['Decil','Indkomst','Moms i dag','Moms med forslaget','Tilbagebetaling','Nettoændring'];
+      rows=d.base.map((b,i)=>[`${i+1}.`,k(b),k(d.now[i]),k(d.nw[i]),k(d.back),k(d.tax[i])]);
+      foot=['Gns.',k(avg(d.base)),k(avg(d.now)),k(avg(d.nw)),k(d.back),k(avg(d.tax))];
+      note='Positiv nettoændring = betaler mere, end man får tilbage. Kun de positive beløb tælles som finansiering.';
+    } else if(r===10){
+      head=['Decil','Indkomst','Forbrug af off. ydelser','Egenbetaling','Andel'];
+      rows=d.base.map((b,i)=>[`${i+1}.`,k(b),k(d.use[i]),k(d.tax[i]),nf0.format(d.tax[i]/d.use[i]*100)+' %']);
+      foot=['Gns.',k(avg(d.base)),k(avg(d.use)),k(avg(d.tax)),''];
+    } else if(d){
+      head=['Decil',...DT_HEAD[r]];
+      rows=d.base.map((b,i)=>[`${i+1}.`,k(b),k(d.tax[i])]);
+      foot=['Gns.',k(avg(d.base)),k(avg(d.tax))];
+      if(r===2||r===4||r===9) note='Decilerne er her formuedeciler, ikke indkomstdeciler.';
+    } else {
+      const per = r===30 ? (70-state.C[30])*5000 : state.C[r];
+      el.innerHTML=`<p class="dtn">Samme beløb for alle: <b>${k(per)} kr.</b> pr. skatteborger pr. år, i alt ${nf0.format(per*4.9e6/1e9)} mia. kr.</p>`;
+      return;
+    }
+    el.innerHTML=`<div class="dtscroll"><table><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr>`+
+      rows.map(c=>`<tr>${c.map(x=>`<td>${x}</td>`).join('')}</tr>`).join('')+
+      `<tr class="tot">${foot.map(x=>`<td>${x}</td>`).join('')}</tr></table></div>`+
+      `<p class="dtn">Kr. pr. person pr. år.${note?' '+note:''}</p>`;
+  });
+}
+const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
 function renderDeciles(d){
   const t=document.getElementById('decTable');
   t.innerHTML = `<tr><th>Decil</th><th>Disponibel indkomst</th><th>Skatteændring</th><th>Ny indkomst</th><th>Ændring</th><th>Velfærdsydelser</th><th>Daglig indkomst</th></tr>`+
