@@ -199,13 +199,17 @@ function computeModel(D, B, C) {
   const top = [18261779];
   for (let b = 2; b <= 10; b++) top.push(top[b - 2] * (1 + Math.pow(b, 1.85) / 100));
   const fD = [], fE = [];
+  // High tax: max(0, wealth − high threshold) × high rate.
+  // Broad tax: max(0, wealth − broad threshold) × broad rate, capped at broad rate × high threshold.
+  // Total = high + broad (the sheet subtracted the high tax, which made the high rate cancel out).
+  const broad = c => Math.min(Math.max(0, c - B[4]) * C[4], C[4] * B[2]);
   fC.forEach(c => {
-    const d = c > B[2] ? (c - B[2]) * C[2] : 0;
-    fD.push(d); fE.push((c > B[4] ? (c - B[4]) * C[4] : 0) - d);
+    const d = Math.max(0, c - B[2]) * C[2];
+    fD.push(d); fE.push(broad(c));
   });
   top.forEach(c => {
-    const d = (c > B[2] ? (c - B[2]) * C[2] : 0) / 10;
-    fD.push(d); fE.push((c > B[4] ? (c - B[4]) * C[4] : 0) / 10 - d);
+    const d = Math.max(0, c - B[2]) * C[2] / 10;
+    fD.push(d); fE.push(broad(c) / 10);
     fA.push(10); fC.push(c);
   });
   const sumif = (h, col) => sum(col.filter((_, i) => fA[i] === h));
