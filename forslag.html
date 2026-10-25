@@ -63,6 +63,7 @@ button:disabled{opacity:.5;cursor:default}
 .ctl input.bin{width:150px;text-align:right;font-variant-numeric:tabular-nums}
 .ctl .unit{font-size:12px;color:var(--muted);width:56px}
 .ctl .lbl{font-size:11px;color:var(--muted);width:52px}
+.ctl .lbl.lw{width:74px}
 .ctl .range{font-size:11px;color:var(--muted)}
 .out{text-align:right;font-variant-numeric:tabular-nums}
 .out .v{font-size:18px;font-weight:600}
@@ -152,7 +153,7 @@ h2.grp{margin:28px 0 12px}
     <nav class="toc" aria-label="Indhold">
       <h4>Generelt</h4><ul><li><a href="#metode">Sådan læser du tallene</a></li></ul>
       <h4>Finansiering</h4><ul><li><a href="#r2">Formueskat på høje formuer</a></li><li><a href="#r3">Ejendomsskat på avance ved salg</a></li><li><a href="#r4">Bred formueskat</a></li><li><a href="#r5">Ekstra ejendomsskat (løbende)</a></li><li><a href="#r6">Ekstra moms med tilbagebetaling</a></li><li><a href="#r7">Udligningsskat på indkomster over gennemsnittet</a></li><li><a href="#r9">Arve- og gaveskat</a></li><li><a href="#r10">Indkomstbaseret egenbetaling for offentlige ydelser</a></li></ul>
-      <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af 25 % af landbrugsjorden</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r28">Lavere forbrug af kød</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li></ul>
+      <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af landbrugsjord</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r28">Lavere forbrug af kød</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li></ul>
     </nav>
     <div>
       <section class="method" id="metode">
@@ -201,7 +202,7 @@ h2.grp{margin:28px 0 12px}
   <h3>Ekstra moms med tilbagebetaling</h3>
   <p>Højere moms på varer, bortset fra fødevarer, der sættes til 0 %. Fordi høje indkomster har et højere forbrug, betaler de mere i moms. Omfordeles provenuet, kan ordningen samlet set blive omfordelende. Omfordelingseffekten er begrænset, men mærkbar. Formålet er dog primært et mere grønt forbrug, især at gøre reparation og holdbarhed mere konkurrencedygtigt.</p>
   <h4>Sådan regner modellen</h4>
-  <p>Satsen er den ekstra moms som andel af prisen før den nye moms (100 % betyder, at momsbelagte varer koster dobbelt). Tilbagebetalingen sættes, så ordningen samlet går i nul. Det beløb, der tælles som finansiering, er nettobidraget fra dem, der betaler mere i ekstra moms, end de får tilbage. Modellen lader forbrugsandelen falde lidt, jo højere momsen er.</p>
+  <p>Satsen er den samlede momssats på momsbelagte varer. I dag er den 25 %, og ved 25 % giver forslaget derfor 0 kr. Ved 100 % koster varerne det dobbelte af prisen uden moms. Tilbagebetalingen sættes, så ordningen samlet går i nul. Det beløb, der tælles som finansiering, er nettobidraget fra dem, der betaler mere i ekstra moms, end de får tilbage. Modellen lader forbrugsandelen falde lidt, jo højere momsen er.</p>
   <p class="back"><a href="index.html#row6">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r7">
   <h3>Udligningsskat på indkomster over gennemsnittet</h3>
@@ -217,7 +218,7 @@ h2.grp{margin:28px 0 12px}
   <h3>Indkomstbaseret egenbetaling for offentlige ydelser</h3>
   <p>Personer med høje indkomster betaler selv en del af de offentlige serviceydelser, de bruger.</p>
   <h4>Sådan regner modellen</h4>
-  <p>For hver decil: forbrug af offentlige ydelser × min(100 %, indkomst ÷ (2 × (forbrug + 500.000))) opløftet i satsen. Satsen (1–5) er en eksponent: forholdet mellem indkomst og grænse opløftes i den. En højere eksponent sænker betalingen mest for de lave indkomster, så ordningen bliver mere progressiv og giver mindre provenu.</p>
+  <p>For hver decil: forbrug af offentlige ydelser × selvbetalingsandel × min(100 %, indkomst ÷ (2 × (forbrug + 500.000))) opløftet i progressiviteten. Selvbetalingsandelen (0–100 %) er den største andel af udgiften, man selv kan komme til at betale. Progressiviteten (1–5) er en eksponent: forholdet mellem indkomst og grænse opløftes i den. En højere progressivitet sænker betalingen mest for de lave indkomster, så ordningen bliver mere progressiv og giver mindre provenu.</p>
   <p>Indkomstbaseret egenbetaling er en måde at beskatte højindkomstgrupper på, uden at det direkte fratrækkes indkomsten. Der er her regnet med en ren indkomsttest, men ideelt set ville man bruge en kombination af formue og indkomst med fokus på indkomst. Retfærdighedsargumentet handler om, hvorvidt det er rimeligt, at en person med høj indkomst får dækket hele sin behandling, som til dels betales af arbejdere med lave indkomster. Sygdom skal ikke medføre fattigdom – men skal rigdom beskyttes i samme grad? Først og fremmest er det dog en form for indkomstskat, der ikke har samme negative adfærdseffekt som en ren indkomstskat, fordi den ikke er knyttet direkte til indkomsten.</p>
   <p class="back"><a href="index.html#row10">← Til forslaget i regnemaskinen</a></p>
 </section>
@@ -259,21 +260,25 @@ h2.grp{margin:28px 0 12px}
   <h4>Kilder</h4><ul class="srcs"><li><a href="https://cdn.trafikstyrelsen.dk/trafikstyrelsen/Media/639045138110697576/Sektorrapport%202024.pdf" target="_blank" rel="noopener">Trafikstyrelsen: Sektorrapport for den kollektive trafik 2024</a></li><li><a href="https://de.statista.com/statistik/studie/id/174117/dokument/consumption-indicators-denmark-report/" target="_blank" rel="noopener">Statista: Consumption indicators – Denmark</a></li></ul>
   <p class="back"><a href="index.html#row23">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r24">
-  <h3>Opkøb af 25 % af landbrugsjorden</h3>
-  <p>Staten opkøber en fjerdedel af landbrugsjorden, med indfasning. Prisen er forholdsvis lav, fordi opkøbet antages lånefinansieret og afdraget over 30 år til en lav offentlig rente.</p>
+  <h3>Opkøb af landbrugsjord</h3>
+  <p>Staten opkøber landbrugsjord på favorable vilkår. Ca. 75 kr. pr. skatteborger pr. år svarer til opkøb af ca. 1 % af landbrugsjorden.</p>
   <p class="back"><a href="index.html#row24">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r25">
   <h3>Udbygning af elnet og grøn energi</h3>
-  <p>Omtrent en fordobling af investeringerne i elnet og vedvarende energi. En årlig investering på 1 % af BNP vil give løbende, gradvise forbedringer, men har vanskeligt ved at imødekomme behovet for el med en CO₂-neutral målsætning – især hvis man medregner behovet fra datacentre.</p>
-  <h4>Kilder</h4><ul class="srcs"><li><a href="https://billigladeboks.dk/investering-i-eldistributionsnet/" target="_blank" rel="noopener">Billig Ladeboks: Investering i eldistributionsnettet</a></li><li><a href="https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob" target="_blank" rel="noopener">Rambøll: Udbygning af elnettet vil koste et trecifret milliardbeløb</a></li></ul>
+  <p>Omtrent en fordobling af investeringerne i elnet og vedvarende energi.</p>
+  <p>I dag investeres ca. 7 mia. kr. om året i distributionsnettet og ca. 10 mia. kr. i transmissionsnettet, i alt ca. 17–18 mia. kr. (ca. 0,6 % af BNP). Elnetselskabernes egne planer peger på ca. 8,5 mia. kr. om året i distributionsnettet i 2027–2036. Med yderligere ca. 10 mia. kr. om året kommer investeringerne i elnettet op på ca. 1 % af BNP.</p>
+  <p>Det samlede investeringsbehov i den grønne omstilling – vind, sol, elnet, biogas, Power-to-X, fjernvarme mv. – er anslået til ca. 50 mia. kr. om året frem mod 2028 og over 100 mia. kr. om året frem mod 2030, hvis målene skal nås. Med den nuværende politik ligger investeringerne derimod nogenlunde fladt frem mod 2031 og falder derefter.</p>
+  <p>En årlig investering på 1 % af BNP vil give løbende, gradvise forbedringer, men har vanskeligt ved at imødekomme behovet for el med en CO₂-neutral målsætning – især hvis man medregner behovet fra datacentre.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://greenpowerdenmark.dk/nyheder/netudviklingsplaner-ti-aar-med-staerkt-stigende-elforbrug-batterier" target="_blank" rel="noopener">Green Power Denmark: Netudviklingsplaner – ti år med stærkt stigende elforbrug og batterier (2026)</a></li><li><a href="https://greenpowerdenmark.dk/nyheder/elnetselskaberne-fordobler-deres-investeringer-lokale-elnet" target="_blank" rel="noopener">Green Power Denmark: Elnetselskaberne fordobler deres investeringer i lokale elnet</a></li><li><a href="https://en.energinet.dk/about-our-news/news/2023/06/13/energinet-establishes-3-300-km-of-electricity-connections-and-much-more-is-on-the-way" target="_blank" rel="noopener">Energinet: 41 mia. kr. til transmissionsnettet i 2023–2026</a></li><li><a href="https://finansdanmark.dk/media/f3ihhu44/klimapartnerskabet_baggrundsrapport_2025.pdf" target="_blank" rel="noopener">COWI for Klimapartnerskabet for Finanssektoren: Analyse af barrierer for øget finansiering og investeringer i den grønne omstilling (2025)</a></li><li><a href="https://www.ae.dk/analyse/2025-08-investeringer-i-groen-omstilling-er-faldet-med-500-mia-kr-frem-mod-2035" target="_blank" rel="noopener">AE: Investeringer i grøn omstilling er faldet med 500 mia. kr. frem mod 2035</a></li><li><a href="https://www.ramboll.com/da-dk/indsigter/co2-reduktion/ramboll-udbygning-af-elnettet-vil-koste-trecifret-milliardbelob" target="_blank" rel="noopener">Rambøll: Udbygning af elnettet vil koste et trecifret milliardbeløb</a></li><li><a href="https://billigladeboks.dk/investering-i-eldistributionsnet/" target="_blank" rel="noopener">Billig Ladeboks: Investering i eldistributionsnettet</a></li></ul>
   <p class="back"><a href="index.html#row25">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r26">
   <h3>Forsvar</h3>
-  <p>Ekstra forsvarsudgifter. NATO kræver 3,5 % yderligere, hvoraf en mindre del allerede er afsat i det nuværende budget. Det er dog næppe en permanent tilstand, medmindre man forudsætter en stigende rivalisering mellem EU og USA.</p>
+  <p>Ekstra forsvarsudgifter. De samlede forsvarsudgifter er midlertidigt hævet til ca. 3 % af BNP i 2025–26. NATO kræver 3,5 % yderligere, hvoraf en mindre del allerede er afsat i det nuværende budget. Det er dog næppe en permanent tilstand, medmindre man forudsætter en stigende rivalisering mellem EU og USA.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://www.nationalbanken.dk/media/zwlpelky/hoejere-forsvarsudgifter-kan-oege-kapacitetspresset-moderat.pdf" target="_blank" rel="noopener">Danmarks Nationalbank: Højere forsvarsudgifter kan øge kapacitetspresset moderat</a></li></ul>
   <p class="back"><a href="index.html#row26">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r27">
   <h3>Økologisk mad via subsidier</h3>
-  <p>Tilskud til økologisk mad, delvist eller fuldt. En grov antagelse er, at økologisk mad i gennemsnit koster det dobbelte at producere, og at omkring 11 % af husholdningernes forbrug går til mad, svarende til ca. 5 % af BNP. En fuld overgang til økologisk produktion vil derfor koste op mod 5 % af BNP – mindre, hvis man kan begrænse profitten eller opnå en mere effektiv produktion.</p>
+  <p>Tilskud til økologisk mad, delvist eller fuldt. En grov antagelse er, at økologisk mad i gennemsnit koster det dobbelte at producere, og at omkring 11 % af husholdningernes forbrug går til mad, svarende til ca. 5 % af BNP. En fuld overgang til økologisk produktion vil derfor koste op mod 5 % af BNP – mindre, hvis man kan begrænse profitten eller opnå en mere effektiv produktion. Fuld prislighed mellem økologisk og konventionel mad kræver ca. 4 % af BNP.</p>
   <p class="back"><a href="index.html#row27">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r28">
   <h3>Lavere forbrug af kød</h3>
@@ -281,7 +286,8 @@ h2.grp{margin:28px 0 12px}
   <p class="back"><a href="index.html#row28">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r29">
   <h3>Udviklingsbistand</h3>
-  <p>Ekstra udviklingsbistand.</p>
+  <p>Ekstra udviklingsbistand. Danmarks udviklingsbistand var 0,72 % af BNI i 2025.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://www.dst.dk/da/Statistik/temaer/SDG/globale-verdensmaal/17-partnerskaber-for-handling/delmaal-02/indikator-1" target="_blank" rel="noopener">Danmarks Statistik: Udviklingsbistand i procent af BNI (verdensmål 17.2.1)</a></li></ul>
   <p class="back"><a href="index.html#row29">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r30">
   <h3>Pensionsalder i 2041</h3>
