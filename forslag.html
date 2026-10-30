@@ -115,6 +115,19 @@ main > .toolbar button.ghost{color:var(--on-bg);border-color:var(--on-bg)}
 .row .dtw tr.tot td{font-weight:600;border-top:2px solid var(--line)}
 .dtn{font-size:12px;color:var(--muted);margin:6px 0 0}
 .intro .lede.big{font-size:18px;color:var(--on-bg)!important;font-weight:500}
+.tick{display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer;margin-top:4px}
+.tick input{width:16px;height:16px;accent-color:var(--accent)}
+.row.extra{display:block}
+.xitem{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.xitem:last-child{border-bottom:0}
+.xitem .tick{grid-column:1/2;font-size:15px;margin:0}
+.xitem .note{grid-column:1/2}
+.xitem .xv{grid-column:2/3;grid-row:1/3;text-align:right;font-variant-numeric:tabular-nums;font-weight:600;align-self:center}
+.xitem .xv .off{color:var(--muted);font-weight:400}
+.xitem .more{color:var(--accent);text-decoration:none;white-space:nowrap}
+a.onbg{color:var(--on-bg);text-decoration:underline}
+.dtn.fond{margin-top:8px;padding:8px 10px;background:var(--tint);border-radius:6px;color:var(--ink)}
+@media (max-width:820px){.xitem{grid-template-columns:minmax(0,1fr)}.xitem .xv{grid-column:1/2;grid-row:auto;text-align:left}}
 .badge{font-size:11px;padding:2px 6px;border-radius:10px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:middle}
 @media (max-width:820px){
   .row{grid-template-columns:minmax(0,1fr)}
@@ -157,6 +170,7 @@ h2.grp{margin:28px 0 12px}
       <h4>Generelt</h4><ul><li><a href="#metode">Sådan læser du tallene</a></li></ul>
       <h4>Finansiering</h4><ul><li><a href="#r2">Formueskat på høje formuer</a></li><li><a href="#r3">Ejendomsskat på avance ved salg</a></li><li><a href="#r4">Bred formueskat</a></li><li><a href="#r5">Ekstra ejendomsskat (løbende)</a></li><li><a href="#r6">Ekstra moms med tilbagebetaling</a></li><li><a href="#r7">Udligningsskat på indkomster over gennemsnittet</a></li><li><a href="#r9">Arve- og gaveskat</a></li><li><a href="#r10">Indkomstbaseret egenbetaling for offentlige ydelser</a></li></ul>
       <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af landbrugsjord</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r28">Lavere forbrug af kød</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li></ul>
+      <h4>Yderligere mindre forslag</h4><ul><li><a href="#r13">Selskabsskat-pakke</a></li><li><a href="#r14">Finansiel transaktionsskat</a></li><li><a href="#r15">Kapital- og aktieindkomst beskattes som løn</a></li><li><a href="#r16">Mindre erhvervsstøtte</a></li></ul>
     </nav>
     <div>
       <section class="method" id="metode">
@@ -167,7 +181,7 @@ h2.grp{margin:28px 0 12px}
           <li><b>Realistisk maks./min.:</b> den anslåede sats, hvor der over den kan forventes negative adfærdskorrektioner af den indsamlede skat, mens der under den kun kan forventes begrænsede adfærdsreaktioner. Satserne gælder på lang sigt med indfasning; på kort sigt kan de være det halve eller mindre. For udgifterne er realistisk min. det mindste, der forventeligt skal afsættes på lang sigt for at levere en rimelig service.</li>
           <li><b>Realistisk ramme:</b> finansiering med alle skatter på realistisk maks. minus udgifter med alle udgifter på realistisk min. Det viser, hvor meget luft der realistisk er at fordele.</li>
           <li><b>Andel investering:</b> hvor stor en del af et forslag der regnes som investering/formue frem for forbrug/løn.</li>
-          <li><b>Investering i bundlinjen:</b> udgifter til investering minus finansiering fra investering/formue. Den langsigtede effekt er sat til 5 % af forskellen om året.</li>
+          <li><b>Investering i bundlinjen:</b> udgifter til investering minus finansiering fra investering/formue. Den langsigtede effekt svarer efter ca. 15–20 år til forskellen selv, fordi afkastet af investeringerne ophobes år for år. Effekten viser sig primært i BNP og ikke direkte i statskassen.</li>
           <li><b>Decilerne:</b> befolkningen er delt i ti lige store grupper efter disponibel indkomst. <b>Ny daglig disponibel indkomst</b> er den nye disponible indkomst eksklusiv exceptionelle udgifter som skat på salg af hus, arveskat og egenbetaling, og eksklusiv pensionsindbetalingen.</li>
           <li><b>Uden adfærd:</b> modellen antager, at folk ikke ændrer adfærd, når skatterne ændres. Ved høje satser er det en væsentlig forenkling.</li>
         </ul>
@@ -178,7 +192,8 @@ h2.grp{margin:28px 0 12px}
   <p>En årlig skat på den del af en persons nettoformue, der ligger over fradraget (standard 10 mio. kr.).</p>
   <p>Formueskat har været omdiskuteret, men er samtidig nødvendig for et lige samfund. Her er nogle administrative løsninger, der imødegår hovedparten af indsigelserne:</p>
   <ul class="sol"><li><b>Likviditet:</b> Formueskat kan udskydes mod en lav rente og betales med en andel i virksomheden. Det er særligt vigtigt for almindelige formuer og boliger.</li><li><b>Værdisættelse:</b> SKAT har allerede de oplysninger, der skal til for en værdiansættelse efter typiske modeller. Virksomheder værdiansættes hver eneste dag på markedet.</li><li><b>Iværksættere:</b> Beregnes formueskatten på bogført værdi og overskud, rammer den først virksomheder nævneværdigt, når de er ude over opstartsfasen.</li><li><b>Kapitalflugt:</b> En undersøgelse af Danmark og Sverige viser, at 1 procentpoint højere formueskat får ca. 2 % af de meget formuende til at forlade landet. Effekten på den samlede økonomi er knap målbar (ca. 0,1 % af værditilvæksten), og kun ca. 22 øre pr. krone i provenu går tabt ved udvandring. Danmark har desuden en forholdsvis effektiv exitskat på 42 % af urealiserede gevinster, som kan suppleres af en formueskat, der følger udrejsende i 10–30 år.</li></ul>
-  <h4>Kilder</h4><ul class="srcs"><li><a href="https://www.henrikkleven.com/view/research/published/WealthMig_Jan2026.pdf" target="_blank" rel="noopener">Jakobsen, Kleven, Kolsrud, Landais &amp; Muñoz: Taxing Top Wealth – Migration Responses and their Aggregate Economic Implications (2026)</a></li><li><a href="https://www.nber.org/papers/w32153" target="_blank" rel="noopener">Samme studie som NBER Working Paper 32153</a></li></ul>
+  <p>Store fonde: De erhvervsdrivende fonde ejer tilsammen omkring 1.200 mia. kr. (anslået ud fra De Økonomiske Råds opgørelse og aktiekurserne i 2026). De indgår ikke i formuefordelingen for personer. Sæt flueben for at lade dem betale samme formueskat som høje formuer – ved 1 % giver det ca. 12 mia. kr.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://www.henrikkleven.com/view/research/published/WealthMig_Jan2026.pdf" target="_blank" rel="noopener">Jakobsen, Kleven, Kolsrud, Landais &amp; Muñoz: Taxing Top Wealth – Migration Responses and their Aggregate Economic Implications (2026)</a></li><li><a href="https://www.nber.org/papers/w32153" target="_blank" rel="noopener">Samme studie som NBER Working Paper 32153</a></li><li><a href="https://dors.dk/files/media/E24_kap3_Baggrundsnotat_fonde.pdf" target="_blank" rel="noopener">De Økonomiske Råd: Dansk Økonomi efterår 2024, baggrundsnotat om fondes overskud og formue</a></li></ul>
   <p class="back"><a href="index.html#row2">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r3">
   <h3>Ejendomsskat på avance ved salg</h3>
@@ -301,6 +316,33 @@ h2.grp{margin:28px 0 12px}
   <h4>Sådan regner modellen</h4>
   <p>Hvert år under 70 koster 5.000 kr. pr. skatteborger pr. år. Det ganges med 4,9 mio. og omregnes til andel af BNP.</p>
   <p class="back"><a href="index.html#row30">← Til forslaget i regnemaskinen</a></p>
+</section>
+      <h2 class="grp">Yderligere mindre forslag</h2>
+      <p class="lede" style="margin:-4px 0 12px">Forslag fra artikelserien <a style="color:var(--on-bg)" href="https://solidaritet.dk/her-skal-pengene-komme-fra-vejen-til-100-milliarder-kroner-2-fair-beskatning-er-ikke-brandbeskatning/" target="_blank" rel="noopener">»Her skal pengene komme fra« (Solidaritet)</a>, der ikke direkte eller indirekte er dækket af forslagene ovenfor. Beløbene er seriens egne skøn.</p>
+      <section class="ex" id="r13">
+  <h3>Selskabsskat-pakke</h3>
+  <p>Selskabsskatten hæves fra 22 til 25 % (ca. 6,4 mia. kr. efter adfærd), femårsgrænsen for fremførsel af underskud genindføres (ca. 1,9 mia. kr.), loftet for rentefradrag sænkes fra 21,3 til 10 mio. kr. (0,5–1 mia. kr.), og gevinster ved salg af unoterede selskaber beskattes med 70 % (ca. 0,6 mia. kr.). I alt ca. 9,4 mia. kr. ifølge artikelserien.</p>
+  <p>Selskabsskat er blandt de skatter, der i forskningen har de tydeligste negative effekter på investeringer og på, hvor virksomheder placerer sig. Forslaget er derfor holdt for sig – men medtaget, så alle muligheder er synlige. EU&#x27;s globale minimumsskat på 15 % mindsker risikoen for, at overskud flyttes ud.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://solidaritet.dk/her-skal-pengene-komme-fra-vejen-til-100-milliarder-kroner-2-fair-beskatning-er-ikke-brandbeskatning/" target="_blank" rel="noopener">Solidaritet: Her skal pengene komme fra #2 – Fair beskatning er ikke brandbeskatning</a></li></ul>
+  <p class="back"><a href="index.html#row13">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r14">
+  <h3>Finansiel transaktionsskat</h3>
+  <p>En lille afgift på handel med aktier, obligationer og andre finansielle papirer. Ifølge Skatteministeriets beregning, som artikelserien henviser til, ca. 8,1 mia. kr.</p>
+  <p>Afgiften rammer især hyppig handel og spekulation. Risikoen er, at handlen flytter til udenlandske markeder, hvis afgiften ikke indføres sammen med andre lande.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://solidaritet.dk/her-skal-pengene-komme-fra-vejen-til-100-milliarder-4-den-store-opsamling-og-fire-kolde-fra-kassen/" target="_blank" rel="noopener">Solidaritet: Her skal pengene komme fra #4 – Den store opsamling og fire kolde fra kassen</a></li></ul>
+  <p class="back"><a href="index.html#row14">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r15">
+  <h3>Kapital- og aktieindkomst beskattes som løn</h3>
+  <p>Indkomst fra aktier og kapital beskattes som lønindkomst i stedet for med de lavere satser i dag. Ca. 6,2 mia. kr. ifølge artikelserien.</p>
+  <p>Forslaget fjerner forskellen mellem indkomst fra arbejde og indkomst fra formue, som især gavner de mest formuende.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://solidaritet.dk/her-skal-pengene-komme-fra-vejen-til-100-milliarder-kroner-2-fair-beskatning-er-ikke-brandbeskatning/" target="_blank" rel="noopener">Solidaritet: Her skal pengene komme fra #2 – Fair beskatning er ikke brandbeskatning</a></li></ul>
+  <p class="back"><a href="index.html#row15">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r16">
+  <h3>Mindre erhvervsstøtte</h3>
+  <p>Besparelser på erhvervsstøtte – fx tonnageskatten, DIS-ordningen for søfolk, forskerskatteordningen, det forhøjede F&amp;U-fradrag og afgiftsfritagelser for fly, skibe og fiskeri. Målet i artikelserien er ca. 6 mia. kr. ud af en samlet erhvervsstøtte på ca. 42 mia. kr. (2021).</p>
+  <p>Halvdelen regnes her som investering, da en del af støtten går til forskning og udvikling.</p>
+  <h4>Kilder</h4><ul class="srcs"><li><a href="https://solidaritet.dk/her-skal-pengene-komme-fra-vejen-til-100-milliarder-3-en-venstrefloej-der-ogsaa-kan-prioritere-i-det-offentlige-forbrug/" target="_blank" rel="noopener">Solidaritet: Her skal pengene komme fra #3 – En venstrefløj der også kan prioritere i det offentlige forbrug</a></li></ul>
+  <p class="back"><a href="index.html#row16">← Til forslaget i regnemaskinen</a></p>
 </section>
     </div>
   </div>
