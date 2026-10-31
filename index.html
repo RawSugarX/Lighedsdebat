@@ -38,6 +38,11 @@ hr{border:0;border-top:1px solid var(--line);margin:24px 0}
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
 .field{display:flex;flex-direction:column;gap:4px;min-width:0}
 .field label{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+textarea{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:8px 10px;width:100%;resize:vertical}
+textarea:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.cfield{display:flex;flex-direction:column;gap:4px;margin-top:12px;max-width:720px}
+.cfield label{font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+.savebox.comments{margin-top:32px}
 input[type=text],input[type=number]{font:inherit;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
 input:focus{outline:2px solid var(--accent);outline-offset:-1px}
 button{font:inherit;font-weight:500;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:#fff;padding:7px 14px;cursor:pointer}
@@ -186,6 +191,14 @@ a.onbg{color:var(--on-bg);text-decoration:underline}
     <svg id="chart" width="100%" height="260" role="img" aria-label="Indkomst pr. decil før og efter"></svg>
   </div>
   <div class="tablewrap"><table id="decTable"></table></div>
+
+  <div class="savebox comments">
+    <h2 style="margin-top:0">Mangler vi noget?</h2>
+    <p class="lede">Her kan du tilføje kommentarer, hvis der er finansiering eller udgifter, der ikke er med i ovenstående. Kommentarerne sendes med, når du gemmer dine svar nedenfor, og vises ikke på siden.</p>
+    <div class="cfield"><label for="cFin">Finansiering</label><textarea id="cFin" rows="3" maxlength="2000" placeholder="Fx en skat eller indtægt, vi har overset"></textarea></div>
+    <div class="cfield"><label for="cUdg">Udgifter</label><textarea id="cUdg" rows="3" maxlength="2000" placeholder="Fx et behov, der ikke er med"></textarea></div>
+    <div class="cfield"><label for="cAndet">Feedback/andet</label><textarea id="cAndet" rows="3" maxlength="2000" placeholder="Ros, ris eller andre tanker"></textarea></div>
+  </div>
 
   <div class="savebox">
     <h2 style="margin-top:0">Gem dine svar</h2>
@@ -385,8 +398,9 @@ async function loadSaved(){
     setMsg('Kunne ikke hente gemte svar ('+e.message+'). Viser standardværdier.','neg');
   }
 }
+const cVal=id=>document.getElementById(id).value.trim();
 async function saveAnswer(name, overwrite){
-  const payload = {name, overwrite, B:{}, C:{}};
+  const payload = {name, overwrite, B:{}, C:{}, comments:{fin:cVal('cFin'), udg:cVal('cUdg'), andet:cVal('cAndet')}};
   B_EDIT.forEach(r=>payload.B[r]=state.B[r]);
   payload.B[6] = computeModel(DATA,state.B,state.C).B6;
   for(const r of FIN.concat(SP,[11,12,13,14,15,16])) if(R[r].C!=null) payload.C[r]=state.C[r];
@@ -672,7 +686,9 @@ async function doSave(overwrite){
     const r=await saveAnswer(name,overwrite);
     if(r.status==='exists'){document.getElementById('cName').textContent=name; confirmBox.classList.add('show'); setMsg('');}
     else if(r.status==='created'||r.status==='overwritten'){
-      setMsg(r.status==='created'?`Gemt som "${name}".`:`"${name}" er overskrevet.`,'pos');
+      const hadC=['cFin','cUdg','cAndet'].some(id=>cVal(id));
+      setMsg((r.status==='created'?`Gemt som "${name}".`:`"${name}" er overskrevet.`)+(hadC&&API_URL?' Tak for dine kommentarer!':''),'pos');
+      if(API_URL) ['cFin','cUdg','cAndet'].forEach(id=>document.getElementById(id).value='');
       await loadSaved(); viewing=(saved.find(a=>a.name.toLowerCase()===name.toLowerCase())||{name}).name; updateViewing(); render();
     } else setMsg('Fejl: '+(r.error||'ukendt svar'),'neg');
   }catch(e){ setMsg('Kunne ikke gemme: '+e.message,'neg'); }
