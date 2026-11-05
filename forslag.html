@@ -123,7 +123,7 @@ main > .toolbar button.ghost{color:var(--on-bg);border-color:var(--on-bg)}
 .tick{display:flex;gap:8px;align-items:center;font-size:13px;cursor:pointer;margin-top:4px}
 .tick input{width:16px;height:16px;accent-color:var(--accent)}
 .row.extra{display:block}
-.xitem{display:grid;grid-template-columns:minmax(0,1fr) 200px;gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.xitem{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:4px 16px;padding:10px 0;border-bottom:1px solid var(--line)}
 .xitem:last-child{border-bottom:0}
 .xitem .tick{grid-column:1/2;font-size:15px;margin:0}
 .xitem .note{grid-column:1/2}
@@ -175,8 +175,8 @@ h2.grp{margin:28px 0 12px}
     <nav class="toc" aria-label="Indhold">
       <h4>Generelt</h4><ul><li><a href="#metode">Sådan læser du tallene</a></li></ul>
       <h4>Finansiering</h4><ul><li><a href="#r2">Formueskat på høje formuer</a></li><li><a href="#r3">Ejendomsskat på avance ved salg</a></li><li><a href="#r4">Bred formueskat</a></li><li><a href="#r5">Ekstra ejendomsskat (løbende)</a></li><li><a href="#r6">Ekstra moms med tilbagebetaling</a></li><li><a href="#r7">Udligningsskat på indkomster over gennemsnittet</a></li><li><a href="#r9">Arve- og gaveskat</a></li><li><a href="#r10">Indkomstbaseret egenbetaling for offentlige ydelser</a></li></ul>
-      <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af landbrugsjord</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r28">Lavere forbrug af kød</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li><li><a href="#r39">Kortere arbejdstid</a></li></ul>
-      <h4>Andre forslag</h4><ul><li><a href="#r13">Selskabsskat-pakke</a></li><li><a href="#r14">Finansiel transaktionsskat</a></li><li><a href="#r15">Kapital- og aktieindkomst beskattes som løn</a></li><li><a href="#r16">Mindre erhvervsstøtte</a></li><li><a href="#r34">Afskaf rentefradraget</a></li><li><a href="#r35">Klimatilpasning og offentligt forsikringstilbud</a></li><li><a href="#r36">Jobgaranti, omskoling og uddannelse</a></li><li><a href="#r37">Energirenovering, varmepumper og fjernvarme</a></li><li><a href="#r38">Flere almene boliger</a></li></ul>
+      <h4>Udgifter</h4><ul><li><a href="#r17">Universel skattelettelse</a></li><li><a href="#r18">Universel pensionsindbetaling (formueudligning)</a></li><li><a href="#r19">Ældrepleje ud over allerede afsatte midler</a></li><li><a href="#r20">Sundhed for ældre ud over allerede afsatte midler</a></li><li><a href="#r21">Sundhedspersonale og uddannelse</a></li><li><a href="#r22">Fordobling af udgifter til mentalt helbred</a></li><li><a href="#r23">Fordobling af udgifter til offentlig trafik</a></li><li><a href="#r24">Opkøb af landbrugsjord</a></li><li><a href="#r25">Udbygning af elnet og grøn energi</a></li><li><a href="#r26">Forsvar</a></li><li><a href="#r27">Økologisk mad via subsidier</a></li><li><a href="#r29">Udviklingsbistand</a></li><li><a href="#r30">Pensionsalder i 2041</a></li><li><a href="#r39">Kortere arbejdstid</a></li></ul>
+      <h4>Andre forslag</h4><ul><li><a href="#r13">Selskabsskat-pakke</a></li><li><a href="#r14">Finansiel transaktionsskat</a></li><li><a href="#r15">Kapital- og aktieindkomst beskattes som løn</a></li><li><a href="#r16">Mindre erhvervsstøtte</a></li><li><a href="#r34">Afskaf rentefradraget</a></li><li><a href="#r35">Klimatilpasning og offentligt forsikringstilbud</a></li><li><a href="#r36">Jobgaranti, omskoling og uddannelse</a></li><li><a href="#r37">Energirenovering, varmepumper og fjernvarme</a></li><li><a href="#r38">Flere almene boliger</a></li><li><a href="#r40">Lavere forbrug af kød</a></li><li><a href="#r41">Skat på luksusgoder</a></li></ul>
     </nav>
     <div>
       <section class="method" id="metode">
@@ -308,10 +308,6 @@ h2.grp{margin:28px 0 12px}
   <h3>Økologisk mad via subsidier</h3>
   <p>Tilskud til økologisk mad, delvist eller fuldt. En grov antagelse er, at økologisk mad i gennemsnit koster det dobbelte at producere, og at omkring 11 % af husholdningernes forbrug går til mad, svarende til ca. 5 % af BNP. En fuld overgang til økologisk produktion vil derfor koste op mod 5 % af BNP – mindre, hvis man kan begrænse profitten eller opnå en mere effektiv produktion. Fuld prislighed mellem økologisk og konventionel mad kræver ca. 4 % af BNP.</p>
   <p class="back"><a href="index.html#row27">← Til forslaget i regnemaskinen</a></p>
-</section><section class="ex" id="r28">
-  <h3>Lavere forbrug af kød</h3>
-  <p>En stor afgift på kød (fx 50/100/200 kr. pr. kg for kylling/gris/okse), hvor provenuet returneres til borgerne. Ved at opkræve høje afgifter, men returnere provenuet til borgerne, bliver den umiddelbare effekt begrænset, men valgfri adfærd kan have stor effekt.</p>
-  <p class="back"><a href="index.html#row28">← Til forslaget i regnemaskinen</a></p>
 </section><section class="ex" id="r29">
   <h3>Udviklingsbistand</h3>
   <p>Ekstra udviklingsbistand. Danmarks udviklingsbistand var 0,72 % af BNI i 2025.</p>
@@ -387,6 +383,15 @@ h2.grp{margin:28px 0 12px}
   <p>Selvom huslejen over tid betaler en del tilbage, regnes hele beløbet som udgift. Det dækker over, at byggeriet fortrænger privat aktivitet, kan presse priserne og giver tabte skatteindtægter i forhold til et alternativ med privat byggeri. Med almindelig finansiering, hvor det offentlige kun lægger grundkapital, ville pengene række langt ud over byggebranchens kapacitet.</p>
   <h4>Kilder</h4><ul class="srcs"><li><a href="https://www.lovguiden.dk/loven/støttebekendtgørelsen/bilag-2" target="_blank" rel="noopener">Støttebekendtgørelsen, bilag 2: maksimumsbeløb for alment byggeri (fra 4. september 2026)</a></li><li><a href="https://www.kk.dk/sites/default/files/2026-03/02.03.26%20-%20Orienteringsnotat%20om%20boligaftalen%20af%2017.%20december%202025%20vedr.%20styrkede%20rammer%20for%20alment%20boligbyggeri.pdf" target="_blank" rel="noopener">Københavns Kommune: Orienteringsnotat om boligaftalen af 17. december 2025</a></li></ul>
   <p class="back"><a href="index.html#row38">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r40">
+  <h3>Lavere forbrug af kød</h3>
+  <p>En stor afgift på kød (fx 50/100/200 kr. pr. kg for kylling/gris/okse), hvor provenuet returneres til borgerne. Ved at opkræve høje afgifter, men returnere provenuet til borgerne, bliver den umiddelbare effekt begrænset, men valgfri adfærd kan have stor effekt.</p>
+  <p class="back"><a href="index.html#row40">← Til forslaget i regnemaskinen</a></p>
+</section><section class="ex" id="r41">
+  <h3>Skat på luksusgoder</h3>
+  <p>En afgift på luksusgoder som fx lystbåde, privatfly, dyre ure og smykker, hvor provenuet returneres til borgerne.</p>
+  <p>Forslaget er regnet som indkomstneutralt. Provenuet er usikkert og ofte lille, fordi køb kan flyttes til udlandet, og fordi luksusafgifter kan koste arbejdspladser i de berørte brancher. Formålet er derfor primært at dæmpe synligt overforbrug og den klimabelastning, der følger med.</p>
+  <p class="back"><a href="index.html#row41">← Til forslaget i regnemaskinen</a></p>
 </section>
     </div>
   </div>
